@@ -15,7 +15,8 @@
     <nav>
         <h1>Glitch Gator</h1>
         <a href="/">Home</a>
-        <a href="/about">About</a>
+        <a href={% url 'about' %}>About</a>
+        <a href={% url 'post_create' %}>Create Post</a>
     </nav>
     {% block content %}{% endblock %}
 </body>
