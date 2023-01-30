@@ -23,7 +23,7 @@ class Profile(models.Model):
     social_link = models.CharField(max_length=255)
     # highlight_color = models.CharField(max_length=7, default='#FFFFFF')
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.user.username
