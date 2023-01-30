@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -8,6 +9,7 @@ class Post(models.Model):
     image_url = models.CharField(max_length=255)
     # tags = ?
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.description
@@ -21,6 +23,7 @@ class Profile(models.Model):
     social_link = models.CharField(max_length=255)
     # highlight_color = models.CharField(max_length=7, default='#FFFFFF')
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # def __str__(self):
-        # return self.user
+    def __str__(self):
+        return self.user.username

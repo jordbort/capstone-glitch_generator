@@ -4,4 +4,9 @@
 
 {% block content %}
 <h2>Register</h2>
+<form method="post" action="{% url 'register' %}">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" class="btn" value="Sign Up" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
 {% endblock %}
