@@ -22,3 +22,7 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         # context["playlists"] = Playlist.objects.all() <-- not "playlist" lol
         return context
+
+
+class About(TemplateView):
+    template_name = 'about.html'
