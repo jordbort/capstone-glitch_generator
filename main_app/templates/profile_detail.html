@@ -3,5 +3,10 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-<h2>Profile</h2>
+<h2>{{profile.user}}'s Profile</h2>
+{% if profile.social_link %}
+<a href={{profile.social_link}} target="_blank" rel="noopener noreferrer">{{profile.social_link}}</a>
+{% endif %}
+<p>profile.created_at: {{profile.created_at}}</p>
+<p>profile.user_id: {{profile.user_id}}</p>
 {% endblock %}

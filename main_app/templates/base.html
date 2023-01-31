@@ -14,14 +14,18 @@
 <body>
     <nav>
         <h1>Glitch Gator</h1>
-        <a href="/">Home</a> | 
-        <a href={% url 'about' %}>About</a> | 
-        <a href={% url 'post_create' %}>Create Post</a> | 
+        <a href="/">Home</a> |
+        <a href="{% url 'about' %}">About</a> |
+        <a href="{% url 'post_create' %}">Create Post</a> |
         {% if user.is_authenticated %}
-        <span>Welcome: {{user.username}}</span> | 
+        <span>Welcome:
+            <a href="/profile/{{auth_profile.id}}/">
+                {{user.username}}
+            </a>
+        </span> |
         <a href="{% url 'logout' %}">Logout</a>
         {% else %}
-        <a href="{% url 'login' %}">Log In</a> | 
+        <a href="{% url 'login' %}">Log In</a> |
         <a href="{% url 'register' %}">Make an account</a>
         {% endif %}
     </nav>
