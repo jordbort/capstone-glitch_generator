@@ -63,7 +63,7 @@ class PostCreate(CreateView):
                 user_id=current_user.id)
         return context
 
-# PostDetail
+
 @method_decorator(login_required, name='dispatch')
 class PostDetail(DetailView):
     model = Post
@@ -82,18 +82,33 @@ class PostDetail(DetailView):
 class PostUpdate(UpdateView):
     model = Post
     fields = ['description']
-    template_name = "post_update.html"
+    template_name = "post_edit.html"
 
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.object.pk})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context['auth_profile'] = Profile.objects.get(
+                user_id=current_user.id)
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
 class PostDelete(DeleteView):
-    model = Post or Profile
-    template_name = '_delete_confirm.html'
+    model = Post
+    template_name = 'post_delete_confirm.html'
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context['auth_profile'] = Profile.objects.get(
+                user_id=current_user.id)
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -113,12 +128,26 @@ class ProfileDetail(DetailView):
 @method_decorator(login_required, name='dispatch')
 class ProfileUpdate(UpdateView):
     model = Profile
-    fields = []
-    template_name = "profile_update.html"
+    fields = ['social_link']
+    template_name = "profile_edit.html"
+
+    # def get(self, request):
+    #     form = UserCreationForm()
+    #     context = {"form": form}
+    # return render(request, "registration/register.html", context)
 
     def get_success_url(self):
         return reverse('profile_detail', kwargs={'pk': self.object.pk})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # form = UserCreationForm()
+        # context['form'] = form
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context['auth_profile'] = Profile.objects.get(
+                user_id=current_user.id)
+        return context
 
 
 @method_decorator(login_required, name='dispatch')
@@ -126,6 +155,14 @@ class ProfileDelete(DeleteView):
     model = Profile
     template_name = 'profile_delete_confirm.html'
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context['auth_profile'] = Profile.objects.get(
+                user_id=current_user.id)
+        return context
 
 
 class Register(View):
