@@ -4,9 +4,15 @@
 
 {% block content %}
 <h2>{{profile.user}}'s Profile</h2>
+<p>(profile) {{profile}}</p>
+<p>(profile.user) {{profile.user}}</p>
+<p>(profile.user.username) {{profile.user.username}}</p>
+<p>(profile.user.email) {{profile.user.email}}</p>
 {% if profile.social_link %}
 <a href={{profile.social_link}} target="_blank" rel="noopener noreferrer">{{profile.social_link}}</a>
+{% else %}
+<p>(no social link)</p>
 {% endif %}
-<p>profile.created_at: {{profile.created_at}}</p>
-<p>profile.user_id: {{profile.user_id}}</p>
+<p>(profile.created_at) {{profile.created_at}}</p>
+<p>(profile.user_id) {{profile.user_id}}</p>
 {% endblock %}
