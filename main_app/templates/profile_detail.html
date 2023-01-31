@@ -4,15 +4,30 @@
 
 {% block content %}
 <h2>{{profile.user}}'s Profile</h2>
-<p>(profile) {{profile}}</p>
-<p>(profile.user) {{profile.user}}</p>
-<p>(profile.user.username) {{profile.user.username}}</p>
-<p>(profile.user.email) {{profile.user.email}}</p>
+<p>(profile): {{profile}}</p>
+<p>(profile.user): {{profile.user}}</p>
+<p>(profile.user.username): {{profile.user.username}}</p>
+<p>(profile.user.email): {{profile.user.email}}</p>
+<p>(profile.user.first_name): {{profile.user.first_name}}</p>
+<p>(profile.user.last_name): {{profile.user.last_name}}</p>
+
 {% if profile.social_link %}
 <a href={{profile.social_link}} target="_blank" rel="noopener noreferrer">{{profile.social_link}}</a>
 {% else %}
 <p>(no social link)</p>
 {% endif %}
-<p>(profile.created_at) {{profile.created_at}}</p>
-<p>(profile.user_id) {{profile.user_id}}</p>
+
+<p>(profile.created_at): {{profile.created_at}}</p>
+<p>(profile.user_id): {{profile.user_id}}</p>
+<br />
+<div class="debug">
+    <p class="debug orange">are you {{profile.user.username}}?</p>
+    {% if profile.user.id == auth_profile.user_id %}
+    <p class="debug orange">yes, you're {{auth_profile}}!</p>
+    <p class="debug orange"><a href="edit" class="debug blue">Click here to edit this profile</a></p>
+    <p class="debug orange"><a href="delete" class="debug blue">Click here to delete this profile</a></p>
+    {% else %}
+    <p class="debug orange">no, you're {{auth_profile}}! you can't edit this profile!</p>
+    {% endif %}
+</div>
 {% endblock %}

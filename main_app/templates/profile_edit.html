@@ -4,4 +4,16 @@
 
 {% block content %}
 <h2>Edit Profile</h2>
+<p>Checking again: are you {{profile.user.username}}?</p>
+{% if profile.user.id == auth_profile.user_id %}
+<p>yes, you're {{auth_profile}}! please proceed</p>
+
+
+<form action="" method="post">
+    {% csrf_token %} {{form.as_p}} <input type="submit" value="Edit profile" />
+</form>
+
+{% else %}
+<p>no, you're {{auth_profile}}! you shouldn't be here!</p>
+{% endif %}
 {% endblock %}

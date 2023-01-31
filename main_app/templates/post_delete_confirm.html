@@ -3,5 +3,22 @@
 {% block title %}Delete Post{% endblock %}
 
 {% block content %}
-<h2>Delete Post</h2>
+<h2 class="debug">Delete Post</h2>
+<p>Checking again: are you {{post.user.username}}?</p>
+{% if post.user.id == auth_profile.user_id %}
+<p>yes, you're {{auth_profile}}! please proceed</p>
+<h3 class="debug">Are you sure you want to delete this post? There's no going back!</h3>
+
+<div class="debug blue">
+    <img src={{post.image_url}} class="debug" width="50%" height="auto" />
+    <p class="debug">description: {{post.description}}</p>
+</div>
+
+<form action="" method="post">
+    {% csrf_token %} {{form.as_p}} <input type="submit" value="Delete post" />
+</form>
+
+{% else %}
+<p>no, you're {{auth_profile}}! you shouldn't be here!</p>
+{% endif %}
 {% endblock %}

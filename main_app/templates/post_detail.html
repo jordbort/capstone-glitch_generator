@@ -10,7 +10,7 @@
     <!-- <p class="debug">(post.id) {{post.id}}</p> -->
     <p class="debug">(post.user.username) {{post.user.username}}</p>
     <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
-    <img src={{post.image_url}} class="debug" width="40%" height="auto" />
+    <img src={{post.image_url}} class="debug" width="50%" height="auto" />
     <p class="debug">description: {{post.description}}</p>
 
     {% timezone "EST" %}
@@ -20,11 +20,15 @@
     <!-- <p class="debug">(post.tags) {{post.tags}}</p> -->
     <p class="debug">(timezone default) Posted on {{post.created_at}}</p>
 </div>
-
-<p>are you {{post.user.username}}?</p>
-{% if post.user.id == auth_profile.user_id %}
-<p>yes, you're {{auth_profile}}!</p>
-{% else %}
-<p>no, you're {{auth_profile}}! you can't edit this post</p>
-{% endif %}
+<br />
+<div class="debug">
+    <p class="debug orange">are you {{post.user.username}}?</p>
+    {% if post.user.id == auth_profile.user_id %}
+    <p class="debug orange">yes, you're {{auth_profile}}!</p>
+    <p class="debug orange"><a href="edit" class="debug blue">Click here to edit this post</a></p>
+    <p class="debug orange"><a href="delete" class="debug blue">Click here to delete this post</a></p>
+    {% else %}
+    <p class="debug orange">no, you're {{auth_profile}}! you can't edit this post!</p>
+    {% endif %}
+</div>
 {% endblock %}
