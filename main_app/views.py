@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from .models import *
-import datetime as dt
 
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -12,7 +11,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -22,6 +21,7 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()
         current_user = self.request.user
         if current_user.is_authenticated:
             context['auth_profile'] = Profile.objects.get(

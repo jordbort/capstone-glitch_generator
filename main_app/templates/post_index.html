@@ -1,7 +1,39 @@
 {% extends 'base.html' %}
 
+
 {% block title %}Home{% endblock %}
 
 {% block content %}
 <h2>Home</h2>
+{% for post in posts %}
+<!-- <p class="debug">A post exists!</p> -->
+<div class="debug">
+    <!-- <p class="debug">(post.id) {{post.id}}</p> -->
+    <!-- <p class="debug">(post.user_id) {{post.user_id}}</p> -->
+    <!-- <p class="debug">(post.user) {{post.user}}</p> -->
+    <p class="debug">Posted by {{post.user.username}}</p>
+    <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
+    <img src={{post.image_url}} class="debug" width="40%" height="auto" />
+    <p class="debug">{{post.description}}</p>
+
+    <!-- {% load tz %} -->
+
+    {% timezone "EST" %}
+    <p class="debug">(timezone "EST") Posted on {{post.created_at}}</p>
+    {% endtimezone %}
+
+    <!-- {% timezone None %} -->
+    <p class="debug">(timezone tz) Posted on {{post.created_at}}</p>
+    <!-- {% endtimezone %} -->
+
+
+    <p class="debug">(time filter) Posted on {{post.created_at|localtime|date:"H:i"}}</p>
+
+</div>
+<br />
+{% empty %}
+<p class="debug">There are no posts</p>
+{% endfor %}
+help {{USE_TZ}}
+<!-- {{users}} -->
 {% endblock %}
