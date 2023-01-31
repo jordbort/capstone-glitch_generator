@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
 
+{% load tz %}
+
 {% block title %}Post{% endblock %}
 
 {% block content %}
-<h2>Post Detail</h2>
+<h2 class="debug">Post Detail</h2>
+<div class="debug blue">
+    <!-- <p class="debug">(post.id) {{post.id}}</p> -->
+    <p class="debug">(post.user.username) {{post.user.username}}</p>
+    <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
+    <img src={{post.image_url}} class="debug" width="40%" height="auto" />
+    <p class="debug">description: {{post.description}}</p>
+
+    {% timezone "EST" %}
+    <p class="debug">(timezone "EST") Posted on {{post.created_at}}</p>
+    {% endtimezone %}
+
+    <!-- <p class="debug">(post.tags) {{post.tags}}</p> -->
+    <p class="debug">(timezone default) Posted on {{post.created_at}}</p>
+</div>
+
+<p>are you {{post.user.username}}?</p>
+{% if post.user.id == auth_profile.user_id %}
+<p>yes, you're {{auth_profile}}!</p>
+{% else %}
+<p>no, you're {{auth_profile}}! you can't edit this post</p>
+{% endif %}
 {% endblock %}
