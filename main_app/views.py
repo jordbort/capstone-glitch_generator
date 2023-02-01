@@ -22,6 +22,7 @@ class Home(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['change_to_profile_timezone'] = 'America/New_York'
         context['posts'] = Post.objects.all()
         current_user = self.request.user
         if current_user.is_authenticated:
