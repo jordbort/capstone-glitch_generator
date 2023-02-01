@@ -1,3 +1,4 @@
+let imageData
 // ; ((doc) => {
 function getHex(e) {
     console.log('getHex invoked!')
@@ -11,10 +12,10 @@ function getHex(e) {
     // input[type="file"]
     // let control = $('.control')
     // let control = doc.querySelector('.control')
-    let control = document.querySelector('.control')
+    // let control = document.querySelector('.control')
         // , output = $('.output')
         // , checkbox = $('[type="checkbox"]')
-        , af = null
+        let af = null
         // , store = {}
 
     // using Promise handling file processing
@@ -39,8 +40,8 @@ function getHex(e) {
             // 8 => binary: 1 => 00000001 || 2 => hex: 1 => 01   
             // let padValue = 2
             let view = new DataView(af)
-            , result = ''
-            , offset = (8 / 8)
+            let result = ''
+            // , offset = (8 / 8)
 
         // if value has been cache in store, use store value
         // if (store[scale]) {
@@ -59,8 +60,12 @@ function getHex(e) {
 
         // make 1st-time-value into store then output result
         // store[scale] = output.innerHTML = result
-        console.log(result)
-        return result
+        // console.log(result)
+        // convert(result)
+        // return result
+        // return
+        imageData = result
+        return newImageConvert(result)
     }
 
     // control.onchange = (e) => {
@@ -75,6 +80,31 @@ function getHex(e) {
     // checkbox.onchange = showData
 
 // })(document)
+}
+
+imageData ? console.log('there is image data!', imageData.substr(0, 8) + '...') : console.log('no image data')
+function newImageConvert(input) {
+    console.log('newImageConvert invoked!')
+    imageData ? console.log('there is image data!', imageData.substr(0, 8) + '...') : console.log('no image data')
+    // let input = document.frmConvert.hex.value.replace(/[^A-Fa-f0-9]/g, "");
+    // if (input.length % 2) {
+    //     console.log("cleaned hex string length is odd.");
+    //     return;
+    // }
+
+    let binary = new Array();
+    for (let i = 0; i < input.length / 2; i++) {
+        let h = input.substr(i * 2, 2);
+        binary[i] = parseInt(h, 16);
+    }
+
+    let byteArray = new Uint8Array(binary);
+    let beforeImage = document.querySelector('.heximage-before');
+    let afterImage = document.querySelector('.heximage-after');
+
+    beforeImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }));
+    afterImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }));
+    //document.body.appendChild(beforeImage)
 }
 
 // document.querySelector('.control').onchange = (e) => getHex(e)
