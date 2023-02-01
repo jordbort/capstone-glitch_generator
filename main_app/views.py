@@ -12,7 +12,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # from django.contrib.auth.models import User
-import pytz, datetime as dt
+
+# import pytz
+# import datetime as dt
 
 # Create your views here.
 
@@ -55,7 +57,7 @@ class PostCreate(CreateView):
 
     def get_success_url(self):
         print(self.kwargs)
-        return reverse('post_detail.html', kwargs={'pk': self.object.pk})
+        return reverse('post_detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -181,7 +183,12 @@ class Register(View):
             user = form.save()
             Profile(user_id=user.id).save()
             login(request, user)
-            return redirect("post_index")
+            # return redirect("post_index")
+            current_user = self.request.user
+            new_profile = Profile.objects.get(user_id=current_user.id)
+            print('*** current_user.id:', current_user.id)
+            print('*** new_profile.id:', new_profile.id)
+            return redirect('profile_detail', new_profile.id)
         else:
             context = {"form": form}
             return render(request, "registration/register.html", context)
