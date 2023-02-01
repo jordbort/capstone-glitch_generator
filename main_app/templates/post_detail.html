@@ -5,28 +5,28 @@
 {% block title %}Post{% endblock %}
 
 {% block content %}
-<h2 class="debug">Post Detail</h2>
-<div class="debug blue">
-    <!-- <p class="debug">(post.id) {{post.id}}</p> -->
-    <p class="debug">(post.user.username) {{post.user.username}}</p>
-    <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
-    <img src={{post.image_url}} class="debug" width="50%" height="auto" />
-    <p class="debug">description: {{post.description}}</p>
+<h2>Post Detail</h2>
+<div>
+    <!-- <p>(post.id) {{post.id}}</p> -->
+    <p >(post.user.username) {{post.user.username}}</p>
+    <!-- <p>(post.image_url) {{post.image_url}}</p> -->
+    <img src={{post.image_url}} width="50%" height="auto" />
+    <p>description: {{post.description}}</p>
 
     {% timezone "EST" %}
-    <p class="debug">(timezone "EST") Posted on {{post.created_at}}</p>
+    <p>(timezone "EST") Posted on {{post.created_at}}</p>
     {% endtimezone %}
 
-    <!-- <p class="debug">(post.tags) {{post.tags}}</p> -->
-    <!-- <p class="debug">(timezone default) Posted on {{post.created_at}}</p> -->
+    <!-- <p>(post.tags) {{post.tags}}</p> -->
+    <!-- <p>(timezone default) Posted on {{post.created_at}}</p> -->
 </div>
 <br />
 
 <span class="debug">are you "{{post.user.username}}"?</span>
 {% if post.user.id == auth_profile.user_id %}
 <span class="debug">yes, you're "{{auth_profile}}"! please proceed:</span>
-<p><a href="{% url 'post_edit' post.pk %}" class="debug blue">Click here to edit this post</a></p>
-<p><a href="{% url 'post_delete' post.pk %}" class="debug blue">Click here to delete this post</a></p>
+<p><a href="{% url 'post_edit' post.pk %}">Click here to edit this post</a></p>
+<p><a href="{% url 'post_delete' post.pk %}">Click here to delete this post</a></p>
 {% else %}
 <span class="debug">no, you're "{{auth_profile}}" - you can't edit/delete this post!</span>
 {% endif %}
