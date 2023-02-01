@@ -4,19 +4,18 @@
 
 {% block content %}
 <h2>Edit Post</h2>
-<p>Checking again: are you {{post.user.username}}?</p>
-{% if post.user.id == auth_profile.user_id %}
-<p>yes, you're {{auth_profile}}! please proceed</p>
+<span class="debug">Checking again: are you "{{post.user.username}}"?</span>
 
+{% if post.user.id == auth_profile.user_id %}
+<span class="debug">yes, you're "{{auth_profile}}"! please proceed:</span>
 <div>
     <img src={{post.image_url}} width="50%" height="auto" />
 </div>
-
 <form action="" method="post">
     {% csrf_token %} {{form.as_p}} <input type="submit" value="Edit post" />
 </form>
-
 {% else %}
-<p>no, you're {{auth_profile}}! you shouldn't be here!</p>
+<span class="debug">no, you're "{{auth_profile}}" - you're not supposed to be here!</span>
 {% endif %}
+
 {% endblock %}

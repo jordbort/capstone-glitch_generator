@@ -6,30 +6,29 @@
 
 {% block content %}
 <h2>Home</h2>
+<div class="all-posts debug blue">
 
-{% for post in posts %}
-<!-- <p class="debug">A post exists!</p> -->
-<a href="/post/{{post.id}}">
-    <div class="debug blue">
-        <!-- <p class="debug">(post.id) {{post.id}}</p> -->
-        <!-- <p class="debug">(post.user_id) {{post.user_id}}</p> -->
-        <!-- <p class="debug">(post.user) {{post.user}}</p> -->
-        <p class="debug">Posted by {{post.user.username}}</p>
-        <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
-        <img src={{post.image_url}} class="debug" width="40%" height="auto" />
-        <p class="debug">description: {{post.description}}</p>
+    {% for post in posts %}
+    <a href="{% url 'post_detail' post.pk %}">
+        <div class="post-container debug">
+            <!-- <p class="debug">(post.id) {{post.id}}</p> -->
+            <!-- <p class="debug">(post.user_id) {{post.user_id}}</p> -->
+            <!-- <p class="debug">(post.user) {{post.user}}</p> -->
+            <p class="debug">Posted by {{post.user.username}}</p>
+            <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
+            <img src={{post.image_url}} class="debug" />
+            <p class="debug">description: {{post.description}}</p>
 
-        {% timezone "EST" %}
-        <p class="debug">(timezone "EST") Posted on {{post.created_at}}</p>
-        {% endtimezone %}
+            {% timezone "EST" %}
+            <p class="debug">(timezone "EST") Posted on {{post.created_at}}</p>
+            {% endtimezone %}
 
-        <p class="debug">(timezone default) Posted on {{post.created_at}}</p>
-    </div>
-</a>
-<br />
-{% empty %}
+            <p class="debug">(default: UTC) Posted on {{post.created_at}}</p>
+        </div>
+    </a>
+    {% empty %}
+    <p class="debug">There are no posts</p>
+    {% endfor %}
 
-<p class="debug">There are no posts</p>
-{% endfor %}
-
+</div>
 {% endblock %}

@@ -18,17 +18,17 @@
     {% endtimezone %}
 
     <!-- <p class="debug">(post.tags) {{post.tags}}</p> -->
-    <p class="debug">(timezone default) Posted on {{post.created_at}}</p>
+    <!-- <p class="debug">(timezone default) Posted on {{post.created_at}}</p> -->
 </div>
 <br />
-<div class="debug">
-    <p class="debug orange">are you {{post.user.username}}?</p>
-    {% if post.user.id == auth_profile.user_id %}
-    <p class="debug orange">yes, you're {{auth_profile}}!</p>
-    <p class="debug orange"><a href="edit" class="debug blue">Click here to edit this post</a></p>
-    <p class="debug orange"><a href="delete" class="debug blue">Click here to delete this post</a></p>
-    {% else %}
-    <p class="debug orange">no, you're {{auth_profile}}! you can't edit this post!</p>
-    {% endif %}
-</div>
+
+<span class="debug">are you "{{post.user.username}}"?</span>
+{% if post.user.id == auth_profile.user_id %}
+<span class="debug">yes, you're "{{auth_profile}}"! please proceed:</span>
+<p><a href="{% url 'post_edit' post.pk %}" class="debug blue">Click here to edit this post</a></p>
+<p><a href="{% url 'post_delete' post.pk %}" class="debug blue">Click here to delete this post</a></p>
+{% else %}
+<span class="debug">no, you're "{{auth_profile}}" - you can't edit/delete this post!</span>
+{% endif %}
+
 {% endblock %}
