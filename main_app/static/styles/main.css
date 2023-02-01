@@ -1,3 +1,18 @@
+/* h1, */
+/* h2, */
+/* h3, */
+/* h4, */
+/* h5, */
+/* h6, */
+/* p { */
+/* margin: 0; */
+/* } */
+
+a {
+    background-color: pink;
+    /* border: 2px dashed black; */
+}
+
 .debug {
     border: 1px dashed red;
 }
@@ -20,4 +35,28 @@
 
 .thick {
     border-width: 3px;
+}
+
+.all-posts {
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    /* width: 320px; */
+    gap: 16px;
+}
+
+.post-container {
+    background-color: yellow;
+    width: 320px;
+    /* width: 100%; */
+    /* overflow: hidden; */
+    /* margin: 0; */
+    height: 100%;
+}
+
+.post-container img {
+    /* width: auto; */
+    max-width: 100%;
+    /* display: block; */
 }
