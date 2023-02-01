@@ -60,3 +60,12 @@ a {
     max-width: 100%;
     /* display: block; */
 }
+
+.image-select-container {
+    width: 85%;
+    max-width: 720px;
+    background: #f1f2f3;
+    /* margin: .65rem auto; */
+    padding: .65rem;
+    border-radius: 4px;
+}

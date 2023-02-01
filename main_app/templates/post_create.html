@@ -9,14 +9,15 @@
 {% block content %}
 <h2>Create Post</h2>
 
-<div class="container">
+<div class="image-select-container">
     <input type="file" class="control" />
     <!-- <label for="is-hex">
         <input type="checkbox" id="is-hex" value="false" />
         enable hex value
     </label> -->
     <!-- <div class="output"></div> -->
-    <input type="button" class="corrupt" value="corrupt" onclick=changeAfterImage() />
+    <input type="hidden" class="corrupt" value="corrupt" onclick=changeAfterImage() />
+    <input type="hidden" class="reset" value="reset" onclick=resetAfterImage() />
 </div>
 
 <!-- <h1>Hexadecimal -> image</h1>
