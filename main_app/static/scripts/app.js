@@ -1,7 +1,12 @@
 let imageData
+let beforeByteArray
+// let afterByteArray
 // ; ((doc) => {
 function getHex(e) {
-    console.log('getHex invoked!')
+    console.log('> getHex invoked!')
+    imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
+    // beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
+    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
     // 'use strict';
 
     // var store = Object.create(null)
@@ -65,6 +70,9 @@ function getHex(e) {
         // return result
         // return
         imageData = result
+        imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
+        // beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
+        // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
         return newImageConvert(result)
     }
 
@@ -82,10 +90,14 @@ function getHex(e) {
 // })(document)
 }
 
-imageData ? console.log('there is image data!', imageData.substr(0, 8) + '...') : console.log('no image data')
+imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
+beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
+// afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+
 function newImageConvert(input) {
-    console.log('newImageConvert invoked!')
-    imageData ? console.log('there is image data!', imageData.substr(0, 8) + '...') : console.log('no image data')
+    console.log('> newImageConvert invoked!')
+    imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
+    beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
     // let input = document.frmConvert.hex.value.replace(/[^A-Fa-f0-9]/g, "");
     // if (input.length % 2) {
     //     console.log("cleaned hex string length is odd.");
@@ -104,7 +116,51 @@ function newImageConvert(input) {
 
     beforeImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }));
     afterImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }));
+    beforeByteArray = byteArray
+    // afterByteArray = beforeByteArray
+    beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
+    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
     //document.body.appendChild(beforeImage)
+}
+
+function changeAfterImage() {
+    afterByteArray = beforeByteArray
+    console.log('> changeAfterImage invoked!')
+    // imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
+    // beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
+    if (afterByteArray) {
+        console.log('afterByteArray.length:', afterByteArray.length)
+    } else {
+        console.log('no afterByteArray data')
+        return
+    }
+
+    const randomIndexOne = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
+    const randomIndexTwo = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
+    const randomIndexThree = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
+    const randomIndexFour = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
+    console.log('* Random index 1:', randomIndexOne)
+    console.log('* Random index 2:', randomIndexTwo)
+    console.log('* Random index 3:', randomIndexThree)
+    console.log('* Random index 4:', randomIndexFour)
+
+    console.log('Index 1 before:', afterByteArray[randomIndexOne])
+    console.log('Index 2 before:', afterByteArray[randomIndexTwo])
+    console.log('Index 3 before:', afterByteArray[randomIndexThree])
+    console.log('Index 4 before:', afterByteArray[randomIndexFour])
+    afterByteArray[randomIndexOne] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndexTwo] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndexThree] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndexFour] = Math.floor(Math.random() * 256)
+    console.log('Index 1 after:', afterByteArray[randomIndexOne])
+    console.log('Index 2 after:', afterByteArray[randomIndexTwo])
+    console.log('Index 3 after:', afterByteArray[randomIndexThree])
+    console.log('Index 4 after:', afterByteArray[randomIndexFour])
+    
+    let afterImage = document.querySelector('.heximage-after');
+    
+    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }));
 }
 
 // document.querySelector('.control').onchange = (e) => getHex(e)
