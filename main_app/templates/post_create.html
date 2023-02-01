@@ -1,16 +1,31 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block scripts %}<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
+
 {% block title %}Create Post{% endblock %}
 
 {% block content %}
 <h2>Create Post</h2>
 
+<div class="container">
+    <input type="file" class="control" />
+    <!-- <label for="is-hex">
+        <input type="checkbox" id="is-hex" value="false" />
+        enable hex value
+    </label> -->
+    <!-- <div class="output"></div> -->
+</div>
+
+<!-- This form can return when I know where it should go
 <form method="post">
-    <!-- Security Feature  -->
+    <!-- Security Feature  -/->
     {% csrf_token %}
-    <!--  Generate inputs  -->
+    <!--  Generate inputs  -/->
     {{form.as_p}}
-    <!--  Submit form  -->
+    <!--  Submit form  -/->
     <input type="submit" value="Submit" />
 </form>
+-->
 {% endblock %}
