@@ -16,7 +16,7 @@ class Post(models.Model):
 
     class Meta:
         # try '-created_at' for reverse chronological order
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
 
 class Profile(models.Model):
