@@ -13,8 +13,8 @@
     <img src={{post.image_url}} width="50%" height="auto" />
     <p>description: {{post.description}}</p>
 
-    {% timezone "EST" %}
-    <p>(timezone "EST") Posted on {{post.created_at}}</p>
+    {% timezone change_to_profile_timezone %}
+    <p>Posted on {{post.created_at}} (timezone: {{change_to_profile_timezone}})</p>
     {% endtimezone %}
 
     <!-- <p>(post.tags) {{post.tags}}</p> -->

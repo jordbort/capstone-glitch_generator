@@ -12,6 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 # from django.contrib.auth.models import User
+import pytz, datetime as dt
 
 # Create your views here.
 
@@ -70,7 +71,12 @@ class PostDetail(DetailView):
     template_name = 'post_detail.html'
 
     def get_context_data(self, **kwargs):
+        # print(pytz.utc.zone)
+        # print(len(pytz.common_timezones))
         context = super().get_context_data(**kwargs)
+        context['change_to_profile_timezone'] = 'America/New_York'
+        print('UTC:', dt.datetime.now())
+        print('EST?', dt.datetime.now(tz=dt.timezone(offset=dt.timedelta(hours=-5))))
         current_user = self.request.user
         if current_user.is_authenticated:
             context['auth_profile'] = Profile.objects.get(
