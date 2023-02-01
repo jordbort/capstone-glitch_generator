@@ -92,17 +92,15 @@ function newImageConvert(input) {
 
     let byteArray = new Uint8Array(binary)
 
-    beforeImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }))
-    afterImage.src = window.URL.createObjectURL(new Blob([byteArray], { type: 'application/octet-stream' }))
     beforeByteArray = byteArray
-    afterByteArray = beforeByteArray
+    afterByteArray = byteArray
     beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
-    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
-    //document.body.appendChild(beforeImage)
+    afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+    beforeImage.src = window.URL.createObjectURL(new Blob([beforeByteArray], { type: 'application/octet-stream' }))
+    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
 
 function changeAfterImage() {
-    // afterByteArray = beforeByteArray
     console.log('> changeAfterImage invoked!')
 
     if (afterByteArray) {
@@ -112,27 +110,27 @@ function changeAfterImage() {
         return
     }
 
-    const randomIndex1 = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
-    const randomIndex2 = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
-    const randomIndex3 = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
-    const randomIndex4 = Math.floor(Math.random() * beforeByteArray.length - 100) + 100
-    console.log('* Random index 1:', 51)
-    console.log('* Random index 2:', 52)
-    console.log('* Random index 3:', 53)
-    console.log('* Random index 4:', 54)
+    const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
+    const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
+    const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
+    const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
+    console.log('* Random index 1:', randomIndex1)
+    console.log('* Random index 2:', randomIndex2)
+    console.log('* Random index 3:', randomIndex3)
+    console.log('* Random index 4:', randomIndex4)
 
-    console.log('Index 1 before:', afterByteArray[1])
-    console.log('Index 2 before:', afterByteArray[2])
-    console.log('Index 3 before:', afterByteArray[3])
-    console.log('Index 4 before:', afterByteArray[4])
-    afterByteArray[1] = Math.floor(Math.random() * 256)
-    afterByteArray[2] = Math.floor(Math.random() * 256)
-    afterByteArray[3] = Math.floor(Math.random() * 256)
-    afterByteArray[4] = Math.floor(Math.random() * 256)
-    console.log('Index 1 after:', afterByteArray[1])
-    console.log('Index 2 after:', afterByteArray[2])
-    console.log('Index 3 after:', afterByteArray[3])
-    console.log('Index 4 after:', afterByteArray[4])
+    console.log('Index 1 before:', afterByteArray[randomIndex1])
+    console.log('Index 2 before:', afterByteArray[randomIndex2])
+    console.log('Index 3 before:', afterByteArray[randomIndex3])
+    console.log('Index 4 before:', afterByteArray[randomIndex4])
+    afterByteArray[randomIndex1] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndex2] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
+    afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
+    console.log('Index 1 after:', afterByteArray[randomIndex1])
+    console.log('Index 2 after:', afterByteArray[randomIndex2])
+    console.log('Index 3 after:', afterByteArray[randomIndex3])
+    console.log('Index 4 after:', afterByteArray[randomIndex4])
 
 
     // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
@@ -141,7 +139,7 @@ function changeAfterImage() {
 }
 
 function resetAfterImage() {
-    console.log(beforeByteArray)
-    console.log(afterByteArray)
-    console.log(beforeByteArray === afterByteArray)
+    console.log('before:', beforeByteArray)
+    console.log('after:', afterByteArray)
+    console.log('same?', beforeByteArray === afterByteArray)
 }
