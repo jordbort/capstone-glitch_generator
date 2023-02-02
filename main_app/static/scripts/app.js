@@ -1,16 +1,11 @@
 const imageSelector = document.querySelector('.control')
 imageSelector.onchange = (e) => getHex(e)
 
-// Somehow, before and after byte arrays aren't different?
-
 const beforeImage = document.querySelector('.heximage-before')
 const afterImage = document.querySelector('.heximage-after')
 
-
 const corruptButton = document.querySelector('.corrupt')
 const resetButton = document.querySelector('.reset')
-// corruptButton.type = 'hidden'
-console.log(corruptButton.type)
 
 let imageData
 let beforeByteArray
@@ -18,16 +13,13 @@ let afterByteArray
 
 function getHex(e) {
     console.log('> getHex invoked!')
-    imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
-    // beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
-    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
 
     const pad = (str, len) => str.length < len ? pad('0' + str, len) : str
 
     let af = null
 
     // using Promise handling file processing
-    const readFile = (file) => {
+    function readFile(file) {
         // console.log(file)
         if (!file) {
             console.log('Error: no file detected!')
@@ -41,7 +33,7 @@ function getHex(e) {
         })
     }
 
-    const showData = () => {
+    function renderData() {
         if (!af) { return }
 
         let view = new DataView(af)
@@ -52,37 +44,27 @@ function getHex(e) {
             result += pad(value, 2)
         }
 
-        imageData = result
-        imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
-        imageData ? corruptButton.type = 'button' : null
-        imageData ? resetButton.type = 'button' : null
-        // beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
-        // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+        result ? corruptButton.type = 'button' : null
+        result ? resetButton.type = 'button' : null
         return newImageConvert(result)
     }
 
     if (!e.target.value) {
-        // console.log('no file selected?')
+        // console.log('no file selected')
         // beforeImage.src = ""
         // beforeImage.alt = "nope"
         // afterImage.src = ""
         // afterImage.alt = "nope"
         return
     }
-    readFile(e.target.files[0])
-        // set file buffer 
-        .then(fileBuffer => { af = fileBuffer })
-        .then(() => showData())
-}
 
-imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
-beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
-// afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+    readFile(e.target.files[0])
+        .then(fileBuffer => { af = fileBuffer })
+        .then(() => renderData())
+}
 
 function newImageConvert(input) {
     console.log('> newImageConvert invoked!')
-    imageData ? console.log('there is before image data!', imageData.substr(0, 8) + '...') : console.log('no before image data')
-    beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
 
     let binary = new Array()
     for (let i = 0; i < input.length / 2; i++) {
@@ -92,10 +74,8 @@ function newImageConvert(input) {
 
     let byteArray = new Uint8Array(binary)
 
-    beforeByteArray = byteArray
-    afterByteArray = byteArray
-    beforeByteArray ? console.log('beforeByteArray.length:', beforeByteArray.length) : console.log('no beforeByteArray data')
-    afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
+    beforeByteArray = byteArray.slice(0)
+    afterByteArray = byteArray.slice(0)
     beforeImage.src = window.URL.createObjectURL(new Blob([beforeByteArray], { type: 'application/octet-stream' }))
     afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
@@ -103,9 +83,7 @@ function newImageConvert(input) {
 function changeAfterImage() {
     console.log('> changeAfterImage invoked!')
 
-    if (afterByteArray) {
-        console.log('afterByteArray.length:', afterByteArray.length)
-    } else {
+    if (!afterByteArray) {
         console.log('no afterByteArray data')
         return
     }
@@ -114,32 +92,28 @@ function changeAfterImage() {
     const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
     const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
     const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
-    console.log('* Random index 1:', randomIndex1)
-    console.log('* Random index 2:', randomIndex2)
-    console.log('* Random index 3:', randomIndex3)
-    console.log('* Random index 4:', randomIndex4)
 
-    console.log('Index 1 before:', afterByteArray[randomIndex1])
-    console.log('Index 2 before:', afterByteArray[randomIndex2])
-    console.log('Index 3 before:', afterByteArray[randomIndex3])
-    console.log('Index 4 before:', afterByteArray[randomIndex4])
+    const beforeValue1 = afterByteArray[randomIndex1]
+    const beforeValue2 = afterByteArray[randomIndex2]
+    const beforeValue3 = afterByteArray[randomIndex3]
+    const beforeValue4 = afterByteArray[randomIndex4]
+
     afterByteArray[randomIndex1] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex2] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
-    console.log('Index 1 after:', afterByteArray[randomIndex1])
-    console.log('Index 2 after:', afterByteArray[randomIndex2])
-    console.log('Index 3 after:', afterByteArray[randomIndex3])
-    console.log('Index 4 after:', afterByteArray[randomIndex4])
 
+    console.log(`1) Byte ${randomIndex1.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue1.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex1].toString(16).padStart(2, '0').toUpperCase()}`)
+    console.log(`2) Byte ${randomIndex2.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue2.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex2].toString(16).padStart(2, '0').toUpperCase()}`)
+    console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
+    console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    // afterByteArray ? console.log('afterByteArray.length:', afterByteArray.length) : console.log('no afterByteArray data')
     afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
     console.log('afterImage.src:', afterImage.src)
 }
 
 function resetAfterImage() {
-    console.log('before:', beforeByteArray)
-    console.log('after:', afterByteArray)
-    console.log('same?', beforeByteArray === afterByteArray)
+    console.log('> resetAfterImage invoked!')
+    afterByteArray = beforeByteArray.slice(0)
+    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
