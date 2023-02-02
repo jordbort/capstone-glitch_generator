@@ -5,6 +5,7 @@ const beforeImage = document.querySelector('.heximage-before')
 const afterImage = document.querySelector('.heximage-after')
 
 const corruptButton = document.querySelector('.corrupt')
+const corruptTenTimesButton = document.querySelector('.corrupt-ten-times')
 const resetButton = document.querySelector('.reset')
 
 let imageData
@@ -45,6 +46,7 @@ function getHex(e) {
         }
 
         result ? corruptButton.type = 'button' : null
+        result ? corruptTenTimesButton.type = 'button' : null
         result ? resetButton.type = 'button' : null
         return newImageConvert(result)
     }
@@ -82,16 +84,17 @@ function newImageConvert(input) {
 
 function changeAfterImage() {
     console.log('> changeAfterImage invoked!')
+    // afterByteArray = beforeByteArray.slice(0)
 
     if (!afterByteArray) {
         console.log('no afterByteArray data')
         return
     }
 
-    const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
-    const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
-    const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
-    const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 100) + 100
+    const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
 
     const beforeValue1 = afterByteArray[randomIndex1]
     const beforeValue2 = afterByteArray[randomIndex2]
@@ -109,11 +112,24 @@ function changeAfterImage() {
     console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
     afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
-    console.log('afterImage.src:', afterImage.src)
+    // console.log('afterImage.src:', afterImage.src)
 }
 
 function resetAfterImage() {
     console.log('> resetAfterImage invoked!')
     afterByteArray = beforeByteArray.slice(0)
     afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+}
+
+function doItTenTimes() {
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
 }
