@@ -55,12 +55,7 @@ function getHex(e) {
         return newImageConvert(result)
     }
 
-    if (!e.target.value) {
-        console.log('No file selected!')
-        beforeImage.src = ""
-        afterImage.src = ""
-        return
-    }
+    if (!e.target.value) { return }
 
     readFile(e.target.files[0])
         .then(fileBuffer => { af = fileBuffer })
