@@ -51,6 +51,14 @@ class About(TemplateView):
 class NewPostImage(TemplateView):
     template_name = 'image_maker.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            context['auth_profile'] = Profile.objects.get(
+                user_id=current_user.id)
+        return context
+
 
 # @method_decorator(login_required, name='dispatch')
 # class PostCreate(CreateView):
