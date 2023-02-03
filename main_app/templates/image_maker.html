@@ -7,7 +7,7 @@
 {% block title %}Create Image{% endblock %}
 
 {% block content %}
-<h2>Create Post</h2>
+<h2>Glitch an Image</h2>
 
 <div class="image-select-container debug">
     <input type="file" class="control" />
@@ -24,4 +24,10 @@
         <img class="heximage-after" src="" alt="'After' image preview window" />
     </div>
 </div>
+
+<form action="{% url 'post_create' %}" enctype="multipart/form-data" method="POST">
+    {% csrf_token %}
+    <input type="file" name="image_url" class="image-file" (change)="onFileChange($event)" />
+    <input type="submit" class="submit-image" value="Submit" />
+</form>
 {% endblock %}

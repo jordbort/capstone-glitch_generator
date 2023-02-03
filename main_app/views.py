@@ -47,11 +47,81 @@ class About(TemplateView):
         return context
 
 
+def post_create(request):
+    print('>> hitting post_create()')
+    # print('request.image_url:', request.image_url)
+    print('request.method:', request.method)
+    print('request.FILES.get("image_url", None):', request.FILES.get('image_url', None))
+    print('request.FILES["image_url"]:', request.FILES["image_url"])
+    if request.method == 'POST':
+        print('>> a POST request')
+        image_file = request.FILES.get('image_url', None)
+        print('>>>', image_file)
+        # print(self.request.FILES.get('image_url'))
+        # return redirect('post_create')
+        if image_file:
+            s3 = boto3.client('s3')
+            key = uuid.uuid4().hex[:6] + \
+                image_file.name[image_file.name.rfind('.'):]
+            try:
+                bucket = config('S3_BUCKET')
+                s3.upload_fileobj(image_file, bucket, key)
+                url = f"{config('S3_BASE_URL')}{bucket}/{key}"
+                # print('AWS S3 URL:', url)
+                # we can assign to cat_id or cat (if you have a cat object)
+                # Photo.objects.create(url=url, cat_id=cat_id)
+
+
+                # bucket = config('S3_BUCKET')
+                # s3.upload_fileobj(image_file, bucket, key)
+                # form.instance.image_url = f"{config('S3_BUCKET')}{bucket}/{key}"
+                # # Post.objects.create(image_url=img_url, user_id=user.id)
+                # return super(PostCreate, self).form_valid(form)
+            except:
+                print('An error occurred uploading file to S3')
+                return redirect('post_index')
+        return redirect('post_create')
+    else:
+        print('>> NOT a POST request')
+    # context = {"form": form}
+    return render(request, 'image_maker.html')
+
+
 @method_decorator(login_required, name='dispatch')
 class NewPostImage(TemplateView):
     template_name = 'image_maker.html'
 
+    # def test():
+    #     print('*** RUNNING TEST ***')
+    #     s3 = boto3.client('s3')
+    #     key = uuid.uuid4().hex[:6]
+    #     #  + image_file.name[image_file.name.rfind('.'):]
+    #     for bucket in s3.buckets.all():
+    #         print(bucket.name)
+    #     print(key)
+    #     print('*** END OF TEST ***')
+    # try:
+    #     bucket = config('S3_BUCKET')
+    #     s3.upload_fileobj(image_file, bucket, key)
+    #     form.instance.image_url = f"{config('S3_BUCKET')}{bucket}/{key}"
+    #     # Post.objects.create(image_url=img_url, user_id=user.id)
+    #     return super(PostCreate, self).form_valid(form)
+    # except:
+    #     print('An error occurred uploading file to S3')
+    #     return redirect('post_create')
+
     def get_context_data(self, **kwargs):
+        # print('*** RUNNING TEST ***')
+        # aws_access_key_id = config('AWS_ACCESS_KEY_ID')
+        # aws_secret_access_key = config('AWS_SECRET_ACCESS_KEY')
+        # s3 = boto3.resource('s3')
+        # bucket = config('S3_BUCKET')
+        # key = uuid.uuid4().hex[:6]
+        #  + image_file.name[image_file.name.rfind('.'):]
+        # for bucket in s3.buckets.all():
+        #     print(bucket.name)
+        # print(key)
+        # print('*** END OF TEST ***')
         context = super().get_context_data(**kwargs)
         current_user = self.request.user
         if current_user.is_authenticated:
@@ -64,45 +134,46 @@ class NewPostImage(TemplateView):
 # class PostCreate(CreateView):
 #     template_name = 'post_create.html'
 #     model = Post
-#     fields = []
+#     fields = ['description']
 
-#     # def add_image(request, user):
-#     #     return redirect('post_index')
+    # def add_image(request, user):
+    #     return redirect('post_index')
 
-#     def form_valid(self, form):
-#         print('>> form valid is running')
-#         form.instance.user = self.request.user
-#         # print(form)
-#         image_file = self.request.FILES.get('image_url', None)
-#         print('>>>', image_file)
-#         print(self.request.FILES.get('image_url'))
-#         # return redirect('post_create')
-#         if image_file:
-#             s3 = boto3.client('s3')
-#             key = uuid.uuid4().hex[:6] + \
-#                 image_file.name[image_file.name.rfind('.'):]
-#             try:
-#                 bucket = config('S3_BUCKET')
-#                 s3.upload_fileobj(image_file, bucket, key)
-#                 form.instance.image_url = f"{config('S3_BUCKET')}{bucket}/{key}"
-#                 # Post.objects.create(image_url=img_url, user_id=user.id)
-#                 return super(PostCreate, self).form_valid(form)
-#             except:
-#                 print('An error occurred uploading file to S3')
-#                 return redirect('post_create')
-#         return redirect('post_create')
+    # def form_valid(self, form):
+    #     print('>> form valid is running')
+    #     form.instance.user = self.request.user
+    #     print('self:', self)
+    #     print('form:', form)
+    #     image_file = self.request.FILES.get('image_url', None)
+    #     print('>>>', image_file)
+    #     print(self.request.FILES.get('image_url'))
+        # return redirect('post_create')
+        # if image_file:
+        #     s3 = boto3.client('s3')
+        #     key = uuid.uuid4().hex[:6] + \
+        #         image_file.name[image_file.name.rfind('.'):]
+        #     try:
+        #         bucket = config('S3_BUCKET')
+        #         s3.upload_fileobj(image_file, bucket, key)
+        #         form.instance.image_url = f"{config('S3_BUCKET')}{bucket}/{key}"
+        #         # Post.objects.create(image_url=img_url, user_id=user.id)
+        #         return super(PostCreate, self).form_valid(form)
+        #     except:
+    #             print('An error occurred uploading file to S3')
+    #             return redirect('post_create')
+    #     return redirect('post_create')
 
-#     def get_success_url(self):
-#         print(self.kwargs)
-#         return reverse('post_detail', kwargs={'pk': self.object.pk})
+    # def get_success_url(self):
+    #     print(self.kwargs)
+    #     return reverse('post_detail', kwargs={'pk': self.object.pk})
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         current_user = self.request.user
-#         if current_user.is_authenticated:
-#             context['auth_profile'] = Profile.objects.get(
-#                 user_id=current_user.id)
-#         return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     current_user = self.request.user
+    #     if current_user.is_authenticated:
+    #         context['auth_profile'] = Profile.objects.get(
+    #             user_id=current_user.id)
+    #     return context
 
 
 @method_decorator(login_required, name='dispatch')

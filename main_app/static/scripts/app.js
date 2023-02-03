@@ -1,5 +1,8 @@
 const imageSelector = document.querySelector('.control')
-imageSelector.onchange = (e) => getHex(e)
+imageSelector.onchange = (e) => {
+    getHex(e)
+    console.log(e.target.value)
+}
 
 const beforeImage = document.querySelector('.heximage-before')
 const afterImage = document.querySelector('.heximage-after')
@@ -7,7 +10,9 @@ const afterImage = document.querySelector('.heximage-after')
 const corruptButton = document.querySelector('.corrupt')
 const corruptTenTimesButton = document.querySelector('.corrupt-ten-times')
 const resetButton = document.querySelector('.reset')
-// const formImageFile = document.querySelector('.image-file')
+
+const formImageFile = document.querySelector('.image-file')
+const formImageSubmitButton = document.querySelector('.submit-image')
 
 let imageData
 let beforeByteArray
@@ -50,7 +55,8 @@ function getHex(e) {
             corruptButton.type = 'button'
             corruptTenTimesButton.type = 'button'
             resetButton.type = 'button'
-            // formImageFile.type = 'text'
+            formImageFile.type = 'file'
+            formImageSubmitButton.type = 'submit'
         }
         return newImageConvert(result)
     }
@@ -112,8 +118,8 @@ function changeAfterImage() {
     console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
-    // console.log('afterImage.src:', afterImage.src)
-    // formImageFile.value = afterImage.src
+    // console.log(afterImage.src.substr(5))
+    formImageFile.value = afterImage.src.substr(5)
 }
 
 function resetAfterImage() {

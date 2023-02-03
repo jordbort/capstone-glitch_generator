@@ -2,42 +2,41 @@
 
 {% load static %}
 
-{% block scripts %}
-<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
+<!-- {% block scripts %}<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %} -->
 
 {% block title %}Create Post{% endblock %}
 
 {% block content %}
 <h2>Create Post</h2>
 
-<div class="image-select-container debug">
+<!-- <div class="image-select-container debug">
     <input type="file" class="control" />
-    <!-- <label for="is-hex">
+    <label for="is-hex">
         <input type="checkbox" id="is-hex" value="false" />
         enable hex value
-    </label> -->
-    <!-- <div class="output"></div> -->
+    </label>
+    <div class="output"></div>
     <input type="hidden" class="corrupt" value="Corrupt" onclick=changeAfterImage() />
     <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=doItTenTimes() />
     <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
-</div>
+</div> -->
 
-<div class="preview-windows-container debug blue">
+<!-- <div class="preview-windows-container debug blue">
     <div class="preview-window debug">
         <img class="heximage-before" src="" alt="'Before' image preview window" />
     </div>
     <div class="preview-window debug">
         <img class="heximage-after" src="" alt="'After' image preview window" />
     </div>
-</div>
+</div> -->
 
 <!-- This is the form provided by the GitHub walkthrough -->
-<form action="" enctype="multipart/form-data" method="POST">
+<!-- <form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
 
     {{form.as_p}}
-    <input type="hidden" name="image_url" class="image-file">
-    <input type="submit" class="btn" value="Upload Photo">
-</form>
+    <input type="text" name="image_url" class="image-file" />
+    <input type="submit" class="btn" value="Upload Photo" />
+</form> -->
 
 {% endblock %}
