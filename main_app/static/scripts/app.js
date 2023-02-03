@@ -7,7 +7,7 @@ const afterImage = document.querySelector('.heximage-after')
 const corruptButton = document.querySelector('.corrupt')
 const corruptTenTimesButton = document.querySelector('.corrupt-ten-times')
 const resetButton = document.querySelector('.reset')
-const formImageFile = document.querySelector('.image-file')
+// const formImageFile = document.querySelector('.image-file')
 
 let imageData
 let beforeByteArray
@@ -50,7 +50,7 @@ function getHex(e) {
             corruptButton.type = 'button'
             corruptTenTimesButton.type = 'button'
             resetButton.type = 'button'
-            formImageFile.type = 'text'
+            // formImageFile.type = 'text'
         }
         return newImageConvert(result)
     }
@@ -118,12 +118,12 @@ function changeAfterImage() {
 
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
     // console.log('afterImage.src:', afterImage.src)
-    formImageFile.value = afterImage.src
+    // formImageFile.value = afterImage.src
 }
 
 function resetAfterImage() {
-    URL.revokeObjectURL(afterImage.src)
     console.log('> resetAfterImage invoked!')
+    URL.revokeObjectURL(afterImage.src)
     afterByteArray = beforeByteArray.slice(0)
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
