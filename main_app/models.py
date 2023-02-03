@@ -23,6 +23,8 @@ class Profile(models.Model):
     social_link = models.CharField(max_length=255, null=True, blank=True)
     # highlight_color = models.CharField(max_length=7, default='#FFFFFF')
     created_at = models.DateTimeField(auto_now_add=True)
+    # timezone = ? (default=UTC)
+    # light/dark mode preference ?
     # image_url = models.ImageField(default='default.jpg', upload_to='profile_pics')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
