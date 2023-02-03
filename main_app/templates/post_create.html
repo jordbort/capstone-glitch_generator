@@ -2,14 +2,15 @@
 
 {% load static %}
 
-{% block scripts %}<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
 
 {% block title %}Create Post{% endblock %}
 
 {% block content %}
 <h2>Create Post</h2>
 
-<div class="image-select-container">
+<div class="image-select-container debug">
     <input type="file" class="control" />
     <!-- <label for="is-hex">
         <input type="checkbox" id="is-hex" value="false" />
@@ -21,29 +22,22 @@
     <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
 </div>
 
-<!-- <h1>Hexadecimal -> image</h1>
-<form name="frmConvert" action="">
-    <p>Hex string:</p>
-    <p>
-        <textarea name="hex" rows="8" cols="67" style="width: 550px;"></textarea>
-    </p>
-    <p>
-        <button type=button name="btnConvert" onclick="convert()">
-            Convert
-        </button>
-    </p>
-</form> -->
-<img class="heximage-before" src="" width="40%" />
-<img class="heximage-after" src="" width="40%" />
+<div class="preview-windows-container debug blue">
+    <div class="preview-window debug">
+        <img class="heximage-before" src="" alt="'Before' image preview window" />
+    </div>
+    <div class="preview-window debug">
+        <img class="heximage-after" src="" alt="'After' image preview window" />
+    </div>
+</div>
 
-<!-- This form can return when I know where it should go
-<form method="post">
-    <!-- Security Feature  -/->
+<!-- This is the form provided by the GitHub walkthrough -->
+<form action="" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <!--  Generate inputs  -/->
+
     {{form.as_p}}
-    <!--  Submit form  -/->
-    <input type="submit" value="Submit" />
+    <input type="hidden" name="image_url" class="image-file">
+    <input type="submit" class="btn" value="Upload Photo">
 </form>
--->
+
 {% endblock %}
