@@ -96,6 +96,12 @@ a {
     border-radius: 4px;
 }
 
+.image-file {
+    /* border: 1px dashed red; */
+    /* display: none; */
+    width: 600px;
+}
+
 @media (orientation: portrait) {
     .image-select-container {
         width: 96%;
