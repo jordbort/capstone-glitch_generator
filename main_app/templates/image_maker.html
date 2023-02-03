@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block scripts %}<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
+
+{% block title %}Create Image{% endblock %}
+
+{% block content %}
+<h2>Create Post</h2>
+
+<div class="image-select-container debug">
+    <input type="file" class="control" />
+    <input type="hidden" class="corrupt" value="Corrupt" onclick=changeAfterImage() />
+    <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=doItTenTimes() />
+    <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
+</div>
+
+<div class="preview-windows-container debug blue">
+    <div class="preview-window debug">
+        <img class="heximage-before" src="" alt="'Before' image preview window" />
+    </div>
+    <div class="preview-window debug">
+        <img class="heximage-after" src="" alt="'After' image preview window" />
+    </div>
+</div>
+{% endblock %}

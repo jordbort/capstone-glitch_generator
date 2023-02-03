@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
-from django.shortcuts import redirect
 from django.urls import reverse
 from django.views import View
 from django.views.generic.base import TemplateView
@@ -15,6 +14,9 @@ from django.utils.decorators import method_decorator
 
 # import pytz
 # import datetime as dt
+import boto3
+from decouple import config
+import uuid
 
 # Create your views here.
 
@@ -46,26 +48,53 @@ class About(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class PostCreate(CreateView):
-    template_name = 'post_create.html'
-    model = Post
-    fields = ['image_url', 'description']
+class NewPostImage(TemplateView):
+    template_name = 'image_maker.html'
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(PostCreate, self).form_valid(form)
 
-    def get_success_url(self):
-        print(self.kwargs)
-        return reverse('post_detail', kwargs={'pk': self.object.pk})
+# @method_decorator(login_required, name='dispatch')
+# class PostCreate(CreateView):
+#     template_name = 'post_create.html'
+#     model = Post
+#     fields = []
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            context['auth_profile'] = Profile.objects.get(
-                user_id=current_user.id)
-        return context
+#     # def add_image(request, user):
+#     #     return redirect('post_index')
+
+#     def form_valid(self, form):
+#         print('>> form valid is running')
+#         form.instance.user = self.request.user
+#         # print(form)
+#         image_file = self.request.FILES.get('image_url', None)
+#         print('>>>', image_file)
+#         print(self.request.FILES.get('image_url'))
+#         # return redirect('post_create')
+#         if image_file:
+#             s3 = boto3.client('s3')
+#             key = uuid.uuid4().hex[:6] + \
+#                 image_file.name[image_file.name.rfind('.'):]
+#             try:
+#                 bucket = config('S3_BUCKET')
+#                 s3.upload_fileobj(image_file, bucket, key)
+#                 form.instance.image_url = f"{config('S3_BUCKET')}{bucket}/{key}"
+#                 # Post.objects.create(image_url=img_url, user_id=user.id)
+#                 return super(PostCreate, self).form_valid(form)
+#             except:
+#                 print('An error occurred uploading file to S3')
+#                 return redirect('post_create')
+#         return redirect('post_create')
+
+#     def get_success_url(self):
+#         print(self.kwargs)
+#         return reverse('post_detail', kwargs={'pk': self.object.pk})
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         current_user = self.request.user
+#         if current_user.is_authenticated:
+#             context['auth_profile'] = Profile.objects.get(
+#                 user_id=current_user.id)
+#         return context
 
 
 @method_decorator(login_required, name='dispatch')
