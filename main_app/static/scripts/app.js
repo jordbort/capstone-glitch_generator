@@ -7,6 +7,7 @@ const afterImage = document.querySelector('.heximage-after')
 const corruptButton = document.querySelector('.corrupt')
 const corruptTenTimesButton = document.querySelector('.corrupt-ten-times')
 const resetButton = document.querySelector('.reset')
+const formImageFile = document.querySelector('.image-file')
 
 let imageData
 let beforeByteArray
@@ -45,18 +46,19 @@ function getHex(e) {
             result += pad(value, 2)
         }
 
-        result ? corruptButton.type = 'button' : null
-        result ? corruptTenTimesButton.type = 'button' : null
-        result ? resetButton.type = 'button' : null
+        if (result) {
+            corruptButton.type = 'button'
+            corruptTenTimesButton.type = 'button'
+            resetButton.type = 'button'
+            formImageFile.type = 'text'
+        }
         return newImageConvert(result)
     }
 
     if (!e.target.value) {
-        // console.log('no file selected')
-        // beforeImage.src = ""
-        // beforeImage.alt = "nope"
-        // afterImage.src = ""
-        // afterImage.alt = "nope"
+        console.log('No file selected!')
+        beforeImage.src = ""
+        afterImage.src = ""
         return
     }
 
@@ -67,6 +69,8 @@ function getHex(e) {
 
 function newImageConvert(input) {
     console.log('> newImageConvert invoked!')
+    URL.revokeObjectURL(beforeImage.src)
+    URL.revokeObjectURL(afterImage.src)
 
     let binary = new Array()
     for (let i = 0; i < input.length / 2; i++) {
@@ -78,12 +82,13 @@ function newImageConvert(input) {
 
     beforeByteArray = byteArray.slice(0)
     afterByteArray = byteArray.slice(0)
-    beforeImage.src = window.URL.createObjectURL(new Blob([beforeByteArray], { type: 'application/octet-stream' }))
-    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+    beforeImage.src = URL.createObjectURL(new Blob([beforeByteArray], { type: 'application/octet-stream' }))
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
 
 function changeAfterImage() {
     console.log('> changeAfterImage invoked!')
+    URL.revokeObjectURL(afterImage.src)
     // afterByteArray = beforeByteArray.slice(0)
 
     if (!afterByteArray) {
@@ -111,14 +116,16 @@ function changeAfterImage() {
     console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
     console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
     // console.log('afterImage.src:', afterImage.src)
+    formImageFile.value = afterImage.src
 }
 
 function resetAfterImage() {
+    URL.revokeObjectURL(afterImage.src)
     console.log('> resetAfterImage invoked!')
     afterByteArray = beforeByteArray.slice(0)
-    afterImage.src = window.URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
 }
 
 function doItTenTimes() {
