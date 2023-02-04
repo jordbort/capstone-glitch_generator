@@ -27,7 +27,7 @@
 
 <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
-    <input type="file" name="image_url" class="image-file" (change)="onFileChange($event)" />
+    <input type="file" name="image_url" class="image-file" />
     <input type="submit" class="submit-image" value="Submit" />
 </form>
 {% endblock %}
