@@ -14,6 +14,11 @@
     <input type="hidden" class="corrupt" value="Corrupt" onclick=changeAfterImage() />
     <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=doItTenTimes() />
     <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
+    <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input type="file" name="image_url" class="image-file" accept="image/*" />
+        <input type="hidden" class="submit-image" value="Submit" />
+    </form>
 </div>
 
 <div class="preview-windows-container debug blue">
@@ -25,9 +30,4 @@
     </div>
 </div>
 
-<form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-    <input type="file" name="image_url" class="image-file" accept="image/*" />
-    <input type="hidden" class="submit-image" value="Submit" />
-</form>
 {% endblock %}
