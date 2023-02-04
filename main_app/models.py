@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    description = models.TextField()
+    description = models.CharField(max_length=255, null=True, blank=True)
     image_url = models.CharField(max_length=255)
     # tags = ?
     created_at = models.DateTimeField(auto_now_add=True)
