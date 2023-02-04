@@ -25,7 +25,7 @@
     </div>
 </div>
 
-<form action="{% url 'post_create' %}" enctype="multipart/form-data" method="POST">
+<form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <input type="file" name="image_url" class="image-file" (change)="onFileChange($event)" />
     <input type="submit" class="submit-image" value="Submit" />
