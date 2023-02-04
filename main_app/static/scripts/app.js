@@ -18,7 +18,6 @@ let fileExtension
 
 function getHex(e) {
     // console.log('> getHex invoked!')
-
     const pad = (str, len) => str.length < len ? pad('0' + str, len) : str
 
     let af = null
@@ -88,34 +87,36 @@ function newImageConvert(input) {
 function changeAfterImage() {
     // console.log('> changeAfterImage invoked!')
     URL.revokeObjectURL(afterImage.src)
-    // afterByteArray = beforeByteArray.slice(0)
 
-    if (!afterByteArray) {
-        console.log('no afterByteArray data')
-        return
-    }
+    // Possible placeholder for corruption settings
+
+    // Uncomment to glitch the image from a clean slate each time
+    // afterByteArray = beforeByteArray.slice(0)
 
     const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
 
-    const beforeValue1 = afterByteArray[randomIndex1]
-    const beforeValue2 = afterByteArray[randomIndex2]
-    const beforeValue3 = afterByteArray[randomIndex3]
-    const beforeValue4 = afterByteArray[randomIndex4]
+    // Possibly eventually for displaying hex values on-screen
+    // const beforeValue1 = afterByteArray[randomIndex1]
+    // const beforeValue2 = afterByteArray[randomIndex2]
+    // const beforeValue3 = afterByteArray[randomIndex3]
+    // const beforeValue4 = afterByteArray[randomIndex4]
 
     afterByteArray[randomIndex1] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex2] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
 
+    // Example rendering of hex values
     // console.log(`1) Byte ${randomIndex1.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue1.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex1].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`2) Byte ${randomIndex2.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue2.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex2].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
+    
     let glitchedFile = new File([afterByteArray], `${afterImage.src.substr(afterImage.src.lastIndexOf('/') + 1)}.${fileExtension}`, { type: `image/${fileExtension}` })
     let fileStorage = new DataTransfer()
     fileStorage.items.add(glitchedFile)
