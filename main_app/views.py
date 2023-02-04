@@ -17,7 +17,7 @@ from django.utils.decorators import method_decorator
 import boto3
 import botocore
 import os
-import uuid
+# import uuid
 
 # Create your views here.
 
@@ -50,20 +50,18 @@ class About(TemplateView):
 
 def image_upload(request):
     if request.method == 'POST':
-        print(">> It's a POST request")
         image_file = request.FILES.get('image_url', None)
         if image_file:
             s3 = boto3.client('s3')
-            key = uuid.uuid4().hex[:8] + \
-                image_file.name[image_file.name.rfind('.'):]
-            print('image_file.name:', image_file.name)
             try:
                 bucket = os.getenv('S3_BUCKET')
                 region = os.getenv('S3_REGION_CODE')
-                s3.upload_fileobj(image_file, bucket, key)
-                s3_url = f'https://{bucket}.s3.{region}.amazonaws.com/{key}'
+                s3.upload_fileobj(image_file, bucket, image_file.name)
+                s3_url = f'https://{bucket}.s3.{region}.amazonaws.com/{image_file.name}'
                 print('AWS S3 Bucket URL:', s3_url)
+                context = {'image_url': s3_url}
                 return redirect('post_create')
+                # return render(request, 'post_create.html', context)
             except botocore.exceptions.ClientError as error:
                 print(error)
                 return redirect('post_index')
@@ -109,15 +107,6 @@ class PostCreate(CreateView):
     def get_success_url(self):
         print(self.kwargs)
         return reverse('post_index')
-
-
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super(ArtistCreate, self).form_valid(form)
-
-    # def get_success_url(self):
-    #     print(self.kwargs)
-    #     return reverse('artist_detail', kwargs={'pk': self.object.pk})
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

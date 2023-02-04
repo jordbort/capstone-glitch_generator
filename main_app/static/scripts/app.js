@@ -1,8 +1,5 @@
-const imageSelector = document.querySelector('.control')
-imageSelector.onchange = (e) => {
-    getHex(e)
-    console.log(e.target.value)
-}
+const imageSelector = document.querySelector('.selected-image')
+imageSelector.onchange = (e) => getHex(e)
 
 const beforeImage = document.querySelector('.heximage-before')
 const afterImage = document.querySelector('.heximage-after')
@@ -17,9 +14,10 @@ const formImageSubmitButton = document.querySelector('.submit-image')
 let imageData
 let beforeByteArray
 let afterByteArray
+let fileExtension
 
 function getHex(e) {
-    console.log('> getHex invoked!')
+    // console.log('> getHex invoked!')
 
     const pad = (str, len) => str.length < len ? pad('0' + str, len) : str
 
@@ -29,7 +27,7 @@ function getHex(e) {
     function readFile(file) {
         // console.log(file)
         if (!file) {
-            console.log('Error: no file detected!')
+            // console.log('Error: no file detected!')
             return
         }
         let FR = new FileReader()
@@ -55,7 +53,6 @@ function getHex(e) {
             corruptButton.type = 'button'
             corruptTenTimesButton.type = 'button'
             resetButton.type = 'button'
-            formImageFile.type = 'file'
             formImageSubmitButton.type = 'submit'
         }
         return newImageConvert(result)
@@ -69,7 +66,8 @@ function getHex(e) {
 }
 
 function newImageConvert(input) {
-    console.log('> newImageConvert invoked!')
+    // console.log('> newImageConvert invoked!')
+    fileExtension = imageSelector.value.substr(imageSelector.value.lastIndexOf(".") + 1)
     URL.revokeObjectURL(beforeImage.src)
     URL.revokeObjectURL(afterImage.src)
 
@@ -83,12 +81,12 @@ function newImageConvert(input) {
 
     beforeByteArray = byteArray.slice(0)
     afterByteArray = byteArray.slice(0)
-    beforeImage.src = URL.createObjectURL(new Blob([beforeByteArray], { type: 'application/octet-stream' }))
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+    beforeImage.src = URL.createObjectURL(new Blob([beforeByteArray], { type: `image/${fileExtension}` }))
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
 }
 
 function changeAfterImage() {
-    console.log('> changeAfterImage invoked!')
+    // console.log('> changeAfterImage invoked!')
     URL.revokeObjectURL(afterImage.src)
     // afterByteArray = beforeByteArray.slice(0)
 
@@ -112,21 +110,23 @@ function changeAfterImage() {
     afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
     afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
 
-    console.log(`1) Byte ${randomIndex1.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue1.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex1].toString(16).padStart(2, '0').toUpperCase()}`)
-    console.log(`2) Byte ${randomIndex2.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue2.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex2].toString(16).padStart(2, '0').toUpperCase()}`)
-    console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
-    console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`1) Byte ${randomIndex1.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue1.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex1].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`2) Byte ${randomIndex2.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue2.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex2].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
-    // console.log(afterImage.src.substr(5))
-    formImageFile.value = afterImage.src.substr(5)
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
+    let glitchedFile = new File([afterByteArray], `${afterImage.src.substr(afterImage.src.lastIndexOf('/') + 1)}.${fileExtension}`, { type: `image/${fileExtension}` })
+    let fileStorage = new DataTransfer()
+    fileStorage.items.add(glitchedFile)
+    formImageFile.files = fileStorage.files
 }
 
 function resetAfterImage() {
-    console.log('> resetAfterImage invoked!')
+    // console.log('> resetAfterImage invoked!')
     URL.revokeObjectURL(afterImage.src)
     afterByteArray = beforeByteArray.slice(0)
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: 'application/octet-stream' }))
+    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
 }
 
 function doItTenTimes() {
