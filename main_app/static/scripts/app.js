@@ -52,7 +52,6 @@ function getHex(e) {
             corruptButton.type = 'button'
             corruptTenTimesButton.type = 'button'
             resetButton.type = 'button'
-            formImageSubmitButton.type = 'submit'
         }
         return newImageConvert(result)
     }
@@ -116,11 +115,12 @@ function changeAfterImage() {
     // console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
-    
+
     let glitchedFile = new File([afterByteArray], `${afterImage.src.substr(afterImage.src.lastIndexOf('/') + 1)}.${fileExtension}`, { type: `image/${fileExtension}` })
     let fileStorage = new DataTransfer()
     fileStorage.items.add(glitchedFile)
     formImageFile.files = fileStorage.files
+    if (formImageSubmitButton.type === 'hidden') { formImageSubmitButton.type = 'submit' }
 }
 
 function resetAfterImage() {
