@@ -6,13 +6,15 @@
 
 {% block content %}
 <header>
-    <h1>Create Post</h1>
+    <h1>Add a description</h1>
 </header>
-<img src="{{post_image_url}}" alt="user's image" />
-<form enctype="multipart/form-data" method="POST">
-    {% csrf_token %}
-    <input type="text" name="image_url" value="{{post_image_url}}" />
-    <input type="text" name="description" placeholder="Enter your description" />
-    <input type="submit" class="btn" value="Submit" />
-</form>
+<div class="form-and-image">
+    <form enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input type="text" class="image-file" name="image_url" value="{{post_image_url}}" />
+        <input type="text" class="post-description" name="description" placeholder="Image description (optional)" />
+        <input type="submit" value="Submit" />
+    </form>
+    <img src="{{post_image_url}}" alt="user's image" />
+</div>
 {% endblock %}

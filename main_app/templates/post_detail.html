@@ -34,10 +34,10 @@
     {% if post.user.id == auth_profile.user_id %}
     <!-- <span>yes, you're "{{auth_profile}}"! please proceed:</span> -->
     <div class="button-box">
-        <a href="{% url 'post_edit' post.pk %}" class="button blue">Click here to edit this post</a>
+        <a href="{% url 'post_edit' post.pk %}" class="button blue">Edit your post</a>
     </div>
     <div class="button-box">
-        <a href="{% url 'post_delete' post.pk %}" class="button red">Click here to delete this post</a>
+        <a href="{% url 'post_delete' post.pk %}" class="button red">Delete your post</a>
     </div>
     <!-- {% else } -->
     <!-- <span>no, you're "{{auth_profile}}" - you can't edit/delete this post!</span> -->

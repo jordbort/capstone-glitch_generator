@@ -3,21 +3,29 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block content %}
-<header>
-    <h1>Edit Post</h1>
-</header>
-<span class="debug">Checking again: are you "{{post.user.username}}"?</span>
+<!-- <span>Checking again: are you "{{post.user.username}}"?</span> -->
 
 {% if post.user.id == auth_profile.user_id %}
-<span class="debug">yes, you're "{{auth_profile}}"! please proceed:</span>
-<div>
+<header>
+    <h1>Edit your post</h1>
+</header>
+<div class="form-and-image">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Edit post" />
+    </form>
+    <!-- <span>yes, you're "{{auth_profile}}"! please proceed:</span> -->
+    <!-- <div> -->
     <img src={{post.image_url}} width="50%" height="auto" />
+    <!-- </div> -->
 </div>
-<form action="" method="post">
-    {% csrf_token %} {{form.as_p}} <input type="submit" value="Edit post" />
-</form>
-{% else %}
-<span class="debug">no, you're "{{auth_profile}}" - you're not supposed to be here!</span>
+<div class="button-box">
+    <a href="{% url 'post_detail' post.pk %}" class="button red">Cancel and go back</a>
+</div>
+<!-- {% else } -->
+<!-- <span>no, you're "{{auth_profile}}" - you're not supposed to be here!</span> -->
+
 {% endif %}
 
 {% endblock %}

@@ -2,7 +2,8 @@
 
 {% load static %}
 
-{% block scripts %}<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/app.js' %}" defer></script>{% endblock %}
 
 {% block title %}Create Image{% endblock %}
 
@@ -11,25 +12,26 @@
     <h1>Glitch an Image</h1>
 </header>
 
-<div class="image-select-container debug">
+<div class="image-select-container">
     <input type="file" class="selected-image" accept="image/*" />
-    <input type="hidden" class="corrupt" value="Corrupt x 1" onclick=changeAfterImage() />
-    <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=bigGlitch() />
-    <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
-    <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        <input type="file" name="image_url" class="image-file" accept="image/*" />
-        <input type="hidden" class="submit-image" value="Submit" />
-    </form>
+    <div class="glitch-controls">
+        <input type="hidden" class="corrupt" value="Corrupt x 1" onclick=changeAfterImage() />
+        <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=bigGlitch() />
+        <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
+        <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST" class="file-store">
+            {% csrf_token %}
+            <input type="file" name="image_url" class="image-file" accept="image/*" />
+            <input type="hidden" class="submit-image" value="Create" />
+        </form>
+    </div>
 </div>
 
-<div class="preview-windows-container debug blue">
-    <div class="preview-window debug">
+<div class="preview-windows-container">
+    <div class="preview-window-before">
         <img class="heximage-before" src="" alt="'Before' image preview window" />
     </div>
-    <div class="preview-window debug">
+    <div class="preview-window-after">
         <img class="heximage-after" src="" alt="'After' image preview window" />
     </div>
 </div>
-
 {% endblock %}

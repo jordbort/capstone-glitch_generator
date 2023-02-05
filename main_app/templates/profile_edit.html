@@ -6,16 +6,17 @@
 <header>
     <h1>Edit Profile</h1>
 </header>
-<span class="debug">Checking again: are you {{profile.user.username}}?</span>
+<!-- <span>Checking again: are you {{profile.user.username}}?</span> -->
 {% if profile.user.id == auth_profile.user_id %}
-<span class="debug">yes, you're {{auth_profile}}! please proceed</span>
-
-
+<!-- <span>yes, you're {{auth_profile}}! please proceed</span> -->
 <form action="" method="post">
     {% csrf_token %} {{form.as_p}} <input type="submit" value="Edit profile" />
 </form>
 
-{% else %}
-<span class="debug">no, you're {{auth_profile}}! you shouldn't be here!</span>
+<!-- {% else } -->
+<!-- <span>no, you're {{auth_profile}}! you shouldn't be here!</span> -->
+<div class="button-box">
+    <a href="{% url 'profile_detail' profile.pk %}" class="button red">Cancel and go back</a>
+</div>
 {% endif %}
 {% endblock %}
