@@ -12,6 +12,6 @@ urlpatterns = [
     path('post/<int:pk>/delete', views.PostDelete.as_view(), name='post_delete'),
     path('profile/<int:pk>/', views.ProfileDetail.as_view(), name='profile_detail'),
     path('profile/<int:pk>/edit', views.ProfileUpdate.as_view(), name='profile_edit'),
-    path('profile/<int:pk>/delete', views.ProfileDelete.as_view(), name='profile_delete'),
+    # path('profile/<int:pk>/delete', views.ProfileDelete.as_view(), name='profile_delete'),
     path('accounts/register/', views.Register.as_view(), name='register'),
 ]

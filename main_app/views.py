@@ -205,19 +205,19 @@ class ProfileUpdate(UpdateView):
         return context
 
 
-@method_decorator(login_required, name='dispatch')
-class ProfileDelete(DeleteView):
-    model = Profile
-    template_name = 'profile_delete_confirm.html'
-    success_url = '/'
+# @method_decorator(login_required, name='dispatch')
+# class ProfileDelete(DeleteView):
+#     model = Profile
+#     template_name = 'profile_delete_confirm.html'
+#     success_url = '/'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        current_user = self.request.user
-        if current_user.is_authenticated:
-            context['auth_profile'] = Profile.objects.get(
-                user_id=current_user.id)
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         current_user = self.request.user
+#         if current_user.is_authenticated:
+#             context['auth_profile'] = Profile.objects.get(
+#                 user_id=current_user.id)
+#         return context
 
 
 class Register(View):
