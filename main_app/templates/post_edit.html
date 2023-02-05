@@ -3,7 +3,6 @@
 {% block title %}Edit Post{% endblock %}
 
 {% block content %}
-<!-- <span>Checking again: are you "{{post.user.username}}"?</span> -->
 
 {% if post.user.id == auth_profile.user_id %}
 <header>
@@ -15,17 +14,11 @@
         {{form.as_p}}
         <input type="submit" value="Edit post" />
     </form>
-    <!-- <span>yes, you're "{{auth_profile}}"! please proceed:</span> -->
-    <!-- <div> -->
     <img src={{post.image_url}} width="50%" height="auto" />
-    <!-- </div> -->
 </div>
 <div class="button-box">
     <a href="{% url 'post_detail' post.pk %}" class="button red">Cancel and go back</a>
 </div>
-<!-- {% else } -->
-<!-- <span>no, you're "{{auth_profile}}" - you're not supposed to be here!</span> -->
-
 {% endif %}
 
 {% endblock %}

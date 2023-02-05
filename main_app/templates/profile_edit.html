@@ -6,17 +6,16 @@
 <header>
     <h1>Edit Profile</h1>
 </header>
-<!-- <span>Checking again: are you {{profile.user.username}}?</span> -->
-{% if profile.user.id == auth_profile.user_id %}
-<!-- <span>yes, you're {{auth_profile}}! please proceed</span> -->
-<form action="" method="post">
-    {% csrf_token %} {{form.as_p}} <input type="submit" value="Submit" />
-</form>
 
-<!-- {% else } -->
-<!-- <span>no, you're {{auth_profile}}! you shouldn't be here!</span> -->
+{% if profile.user.id == auth_profile.user_id %}
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="submit" value="Submit" />
+</form>
 <div class="button-box">
     <a href="{% url 'profile_detail' profile.pk %}" class="button red">Cancel and go back</a>
 </div>
 {% endif %}
+
 {% endblock %}

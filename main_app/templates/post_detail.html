@@ -6,7 +6,7 @@
 
 {% block content %}
 <header>
-    <!-- <h1>Post Detail</h1> -->
+
     {% for profile in profiles %}
     {% if post.user.id == profile.user.id %}
     <h1>
@@ -14,6 +14,7 @@
     </h1>
     {% endif %}
     {% endfor %}
+
 </header>
 <div class="details">
     <h2>{{post.description}}</h2>
@@ -21,27 +22,20 @@
     {% timezone change_to_profile_timezone %}
     <p class="posted-at-date">{{post.created_at | date:'F d'}}</p>
     {% endtimezone %}
-    <!-- <p>(post.id) {{post.id}}</p> -->
-    <!-- <p>Posted by: {{post.user.username}}</p> -->
-    <!-- <p>(post.image_url) {{post.image_url}}</p> -->
-    <img src={{post.image_url}} />
 
-    <!-- <p>(post.tags) {{post.tags}}</p> -->
-    <!-- <p>(timezone default) Posted on {{post.created_at}}</p> -->
+    <img src={{post.image_url}} />
 </div>
 <div>
-    <!-- <span>are you "{{post.user.username}}"?</span> -->
+
     {% if post.user.id == auth_profile.user_id %}
-    <!-- <span>yes, you're "{{auth_profile}}"! please proceed:</span> -->
     <div class="button-box">
         <a href="{% url 'post_edit' post.pk %}" class="button blue">Edit your post</a>
     </div>
     <div class="button-box">
         <a href="{% url 'post_delete' post.pk %}" class="button red">Delete your post</a>
     </div>
-    <!-- {% else } -->
-    <!-- <span>no, you're "{{auth_profile}}" - you can't edit/delete this post!</span> -->
     {% endif %}
+
 </div>
 
 {% endblock %}

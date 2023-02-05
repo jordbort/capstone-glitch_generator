@@ -3,7 +3,6 @@
 {% block title %}Delete Post{% endblock %}
 
 {% block content %}
-<!-- <span>Checking again: are you {{post.user.username}}?</span> -->
 
 {% if post.user.id == auth_profile.user_id %}
 <header>
@@ -13,27 +12,23 @@
 
 <div>
     <form action="" method="post">
-        {% csrf_token %} {{form.as_p}} <input type="submit" value="Delete post" />
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Delete post" />
     </form>
     <br />
-
     <div class="form-and-image">
         <img src={{post.image_url}} width="50%" height="auto" />
     </div>
+
     {% if post.description %}
     <p>Description: {{post.description}}</p>
     {% endif %}
-
-    <!-- <span>yes, you're {{auth_profile}}! please proceed</span> -->
-
 
 </div>
 <div class="button-box">
     <a href="{% url 'post_detail' post.pk %}" class="button red">Cancel and go back</a>
 </div>
-<!-- {% else } -->
-<!-- <span>no, you're {{auth_profile}}! you shouldn't be here!</span> -->
 {% endif %}
-
 
 {% endblock %}

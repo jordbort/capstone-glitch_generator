@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -22,6 +21,7 @@
                 <a href="{% url 'image_maker' %}">Create glitch art</a>
             </div>
             <div class="right-side">
+
                 {% if user.is_authenticated %}
                 <span>Logged in:
                     <a href="/profile/{{auth_profile.id}}/">
@@ -33,6 +33,7 @@
                 <a href="{% url 'login' %}">Log in</a> |
                 <a href="{% url 'register' %}">Make an account</a>
                 {% endif %}
+
             </div>
         </div>
     </nav>
