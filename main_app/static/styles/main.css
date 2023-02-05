@@ -1,41 +1,77 @@
-/* h1, */
-/* h2, */
-/* h3, */
-/* h4, */
-/* h5, */
-/* h6, */
-/* p { */
-/* margin: 0; */
-/* } */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Rubik+Glitch&family=Share+Tech&display=swap');
+
+/* 
+    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Rubik Glitch', monospace;
+    font-family: 'Share Tech', sans-serif;
+ */
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+body {
+    background-color: #cccccc;
+    color: #333333;
+    /* font-family: 'JetBrains Mono', monospace; */
+    font-family: 'Share Tech', sans-serif;
+    font-size: 1.25rem;
+    /* background-color: #111111;
+    color: #dddddd; */
+    margin: 0 240px;
+    /* margin: 0 auto; */
+}
+
+nav {
+    /* padding: 0 0 0 16px; */
+    margin-bottom: 24px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p {
+    margin: 0;
+}
 
 a {
-    background-color: pink;
+    /* background-color: pink; */
     /* border: 2px dashed black; */
+    text-decoration: none;
+    color: #333333;
 }
 
-.debug {
-    border: 1px dashed red;
+a:hover {
+    color: #777777;
 }
 
-.blue {
-    border-color: blue;
+.logo {
+    font-family: 'Rubik Glitch', monospace;
+    font-size: 64px;
+    letter-spacing: 16px;
+    padding: 8px 0;
 }
 
-.green {
-    border-color: green;
+.nav-links-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
 
-.orange {
-    border-color: orange;
-}
+/* .left-side, .right-side {
+    width: 20%;
+} */
 
-.black {
-    border-color: black;
-}
+/* .left-side {
+    float: left;
+} */
 
-.thick {
-    border-width: 3px;
-}
+/* .right-side {
+    float: right;
+} */
 
 .all-posts {
     display: flex;
@@ -107,6 +143,7 @@ a {
         width: 96%;
         padding: 8px;
     }
+
     .preview-windows-container {
         flex-flow: column nowrap;
     }
@@ -114,4 +151,32 @@ a {
     .preview-window {
         width: 100%;
     }
+}
+
+
+
+
+
+.debug {
+    border: 1px dashed red;
+}
+
+.blue {
+    border-color: blue;
+}
+
+.green {
+    border-color: green;
+}
+
+.orange {
+    border-color: orange;
+}
+
+.black {
+    border-color: black;
+}
+
+.thick {
+    border-width: 3px;
 }
