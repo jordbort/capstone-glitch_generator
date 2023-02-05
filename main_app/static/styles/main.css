@@ -37,6 +37,10 @@ p {
     margin: 0;
 }
 
+header {
+    margin-bottom: 12px;
+}
+
 a {
     /* background-color: pink; */
     /* border: 2px dashed black; */
@@ -83,17 +87,20 @@ a:hover {
 }
 
 .post-container {
-    background-color: yellow;
+    background-color: #bbbbbb;
+    border: 1px solid #ffffff;
     width: 320px;
     /* width: 100%; */
     /* overflow: hidden; */
     /* margin: 0; */
     height: 100%;
+    padding: 6px 8px;
 }
 
 .post-container img {
     /* width: auto; */
     max-width: 100%;
+    padding: 2px;
     /* display: block; */
 }
 
