@@ -286,16 +286,6 @@ ul li:before {
         font-size: 0.85rem;
     }
 
-    .preview-windows-container {
-        flex-direction: column-reverse;
-    }
-
-    .preview-window-before,
-    .preview-window-after {
-        width: 100%;
-        border-width: 0 4px;
-    }
-
     .form-and-image {
         flex-direction: column;
     }

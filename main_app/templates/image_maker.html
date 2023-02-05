@@ -21,7 +21,7 @@
         <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST" class="file-store">
             {% csrf_token %}
             <input type="file" name="image_url" class="image-file" accept="image/*" />
-            <input type="hidden" class="submit-image" value="Create" />
+            <input type="hidden" class="submit-image" value="Submit" />
         </form>
     </div>
 </div>
