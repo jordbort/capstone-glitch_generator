@@ -20,7 +20,7 @@ body {
     font-size: 1.25rem;
     /* background-color: #111111;
     color: #dddddd; */
-    margin: 0 240px 32px;
+    margin: 0 400px 32px;
     /* border: 1px dashed red; */
     /* margin: 0 auto; */
 }
@@ -38,6 +38,11 @@ p {
     margin: 0;
 }
 
+/* h3 { */
+/* display: none; */
+/* font-size: 2rem; */
+/* } */
+
 header {
     margin-bottom: 12px;
     text-decoration: underline;
@@ -47,11 +52,21 @@ a {
     /* background-color: pink; */
     /* border: 2px dashed black; */
     text-decoration: none;
-    color: #333333;
+    color: #222222;
 }
 
 a:hover {
-    color: #777777;
+    color: #666666;
+}
+
+ul {
+    list-style-type: none;
+}
+
+ul li:before {
+    content: '\203A';
+    position: absolute;
+    margin-left: -16px;
 }
 
 .logo {
@@ -67,17 +82,17 @@ a:hover {
     justify-content: space-between;
 }
 
-/* .left-side, .right-side {
-    width: 20%;
-} */
+.about {
+    border: 1px solid #ffffff;
+    font-family: 'JetBrains Mono', monospace;
+    /* font-size: 1rem; */
+}
 
-/* .left-side {
-    float: left;
-} */
-
-/* .right-side {
-    float: right;
-} */
+.about h2,
+.about h3,
+.about p {
+    margin: 24px;
+}
 
 .all-posts {
     display: flex;
@@ -89,6 +104,7 @@ a:hover {
 }
 
 .post-container {
+    background-color: #cccccc;
     border: 1px solid #ffffff;
     width: 320px;
     /* width: 100%; */
@@ -111,8 +127,19 @@ a:hover {
     width: auto;
     max-width: 100%;
     padding: 2px;
-    
+
     /* display: block; */
+}
+
+.posted-at-date {
+    color: #999999;
+    font-style: italic;
+    font-size: 1rem;
+}
+
+.post-container:hover .posted-at-date {
+    color: #aaaaaa;
+    font-style: italic;
 }
 
 /* .post-container a {
@@ -160,7 +187,45 @@ a:hover {
     /* width: 600px; */
 }
 
+.details p {
+    margin: 8px 0;
+}
+
+.button-box {
+    margin: 32px 0;
+}
+
+.button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    background-color: #bbbbbb;
+    border: 2px solid;
+    border-radius: 20px;
+    padding: 4px 8px;
+}
+
+.button:hover {
+    background-color: #c0c0c0;
+}
+
 @media (orientation: portrait) {
+    body {
+        font-size: 1rem;
+        margin: 4px;
+        /* width: 100%; */
+    }
+
+    .logo {
+        text-align: center;
+        font-size: 36px;
+        letter-spacing: 6px;
+        padding: 8px 0;
+    }
+
+    .nav-links-container {
+        font-size: 0.9rem;
+    }
+
     .image-select-container {
         width: 96%;
         padding: 8px;
@@ -184,15 +249,23 @@ a:hover {
 }
 
 .blue {
-    border-color: blue;
+    border-color: #3333dd;
+}
+
+.blue:hover {
+    border-color: #9999ff;
 }
 
 .green {
     border-color: green;
 }
 
-.orange {
-    border-color: orange;
+.red {
+    border-color: #dd3333;
+}
+
+.red:hover {
+    border-color: #ff9999;
 }
 
 .yellow {
