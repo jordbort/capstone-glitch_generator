@@ -29,6 +29,7 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         context['change_to_profile_timezone'] = 'America/New_York'
         context['posts'] = Post.objects.all()
+        context['profiles'] = Profile.objects.all()
         current_user = self.request.user
         if current_user.is_authenticated:
             context['auth_profile'] = Profile.objects.get(
@@ -131,6 +132,7 @@ class PostDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['change_to_profile_timezone'] = 'America/New_York'
         # print(len(pytz.common_timezones))
+        context['profiles'] = Profile.objects.all()
         current_user = self.request.user
         if current_user.is_authenticated:
             context['auth_profile'] = Profile.objects.get(

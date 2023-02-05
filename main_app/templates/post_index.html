@@ -11,23 +11,31 @@
 <div class="all-posts">
 
     {% for post in posts %}
-    <a href="{% url 'post_detail' post.pk %}">
     <div class="post-container">
-            <p>{{post.user.username}}</p>
-            <img src={{post.image_url}} />
-            <p>{{post.description}}</p>
+        {% for profile in profiles %}
+        {% if post.user.id == profile.user.id %}
+        <a href="{% url 'profile_detail' profile.pk %}">
+            <div class="post-username">{{profile.user.username}}</div>
+        </a>
+        {% endif %}
+        {% endfor %}
+        <a href="{% url 'post_detail' post.pk %}">
+            <div class="post-body">
+                <img src={{post.image_url}} />
+                <p>{{post.description}}</p>
 
-            <!-- {% timezone change_to_profile_timezone } -->
-            <!-- <p>Posted on {{post.created_at | date:'M d, Y'}} at {{post.created_at | date:'h:i:s A'}} ({{change_to_profile_timezone}})</p> -->
-            <!-- {% endtimezone } -->
+                <!-- {% timezone change_to_profile_timezone } -->
+                <!-- <p>Posted on {{post.created_at | date:'M d, Y'}} at {{post.created_at | date:'h:i:s A'}} ({{change_to_profile_timezone}})</p> -->
+                <!-- {% endtimezone } -->
 
-            <!-- <p>Posted on {{post.created_at}} (default: UTC)</p> -->
-            <p class="posted-at-date">{{post.created_at | date:'F d'}}</p>
-            <!-- <p>Posted on {{post.created_at | date:'Y-m-d H:i'}}</p> -->
-            <!-- <p>Posted on {{post.created_at | date:'D d M Y'}}</p> -->
-            <!-- <p>Posted on {{post.created_at | date:'F d, Y h:i'}}</p> -->
-        </div>
-    </a>
+                <!-- <p>Posted on {{post.created_at}} (default: UTC)</p> -->
+                <p class="posted-at-date">{{post.created_at | date:'F d'}}</p>
+                <!-- <p>Posted on {{post.created_at | date:'Y-m-d H:i'}}</p> -->
+                <!-- <p>Posted on {{post.created_at | date:'D d M Y'}}</p> -->
+                <!-- <p>Posted on {{post.created_at | date:'F d, Y h:i'}}</p> -->
+            </div>
+        </a>
+    </div>
     {% empty %}
     <p>There are no posts.</p>
     {% endfor %}

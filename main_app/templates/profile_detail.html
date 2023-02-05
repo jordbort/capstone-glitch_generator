@@ -6,30 +6,35 @@
 <header>
     <h1>{{profile.user}}'s Profile</h1>
 </header>
-<!-- <p>(profile): {{profile}}</p> -->
-<!-- <p>(profile.user): {{profile.user}}</p> -->
-<p>(profile.user.username): {{profile.user.username}}</p>
-<!-- <p>(profile.user.email): {{profile.user.email}}</p> -->
-<!-- <p>(profile.user.first_name): {{profile.user.first_name}}</p> -->
-<!-- <p>(profile.user.last_name): {{profile.user.last_name}}</p> -->
+<div class="details">
+    <!-- <p>(profile): {{profile}}</p> -->
+    <!-- <p>(profile.user): {{profile.user}}</p> -->
+    <!-- <p>(profile.user.username): {{profile.user.username}}</p> -->
+    <!-- <p>(profile.user.email): {{profile.user.email}}</p> -->
+    <!-- <p>(profile.user.first_name): {{profile.user.first_name}}</p> -->
+    <!-- <p>(profile.user.last_name): {{profile.user.last_name}}</p> -->
 
-{% if profile.social_link %}
-<a href={{profile.social_link}} target="_blank" rel="noopener noreferrer">{{profile.social_link}}</a>
-{% else %}
-<p>(no social link)</p>
-{% endif %}
+    {% if profile.social_link %}
+    <p>Visit them at: <a href="{{profile.social_link}}" target="_blank"
+            rel="noopener noreferrer">{{profile.social_link}}</a></p>
+    {% endif %}
 
-<p>(profile.created_at): {{profile.created_at}}</p>
-<p>(profile.user_id): {{profile.user_id}}</p>
-<br />
-
-<span class="debug">are you "{{profile.user.username}}"?</span>
-{% if profile.user.id == auth_profile.user_id %}
-<span class="debug">yes, you're "{{auth_profile}}"!</span>
-<p><a href="{% url 'profile_edit' profile.pk %}">Click here to edit this profile</a></p>
-<p><a href="{% url 'profile_delete' profile.pk %}">Click here to delete this profile</a></p>
-{% else %}
-<span class="debug">no, you're "{{auth_profile}}"! you can't edit/delete this profile!</span>
-{% endif %}
+    <p>User since: {{profile.created_at | date:'F d, Y'}}</p>
+    <!-- <p>(profile.user_id): {{profile.user_id}}</p> -->
+</div>
+<div>
+    <!-- <span>are you "{{profile.user.username}}"?</span> -->
+    {% if profile.user.id == auth_profile.user_id %}
+    <!-- <span>yes, you're "{{auth_profile}}"! please proceed:</span> -->
+    <div class="button-box">
+        <a href="{% url 'profile_edit' profile.pk %}" class="button blue">Edit your profile</a>
+    </div>
+    <div class="button-box">
+        <a href="{% url 'profile_delete' profile.pk %}" class="button red">Delete your profile</a>
+    </div>
+    <!-- {% else } -->
+    <!-- <span>no, you're "{{auth_profile}}" - you can't edit/delete this profile!</span> -->
+    {% endif %}
+</div>
 
 {% endblock %}

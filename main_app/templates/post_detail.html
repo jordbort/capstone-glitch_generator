@@ -6,18 +6,25 @@
 
 {% block content %}
 <header>
-    <h1>Post Detail</h1>
+    <!-- <h1>Post Detail</h1> -->
+    {% for profile in profiles %}
+    {% if post.user.id == profile.user.id %}
+    <h1>
+        <a href="{% url 'profile_detail' profile.pk %}">Posted by: {{profile.user.username}}</a>
+    </h1>
+    {% endif %}
+    {% endfor %}
 </header>
 <div class="details">
-    <!-- <p>(post.id) {{post.id}}</p> -->
-    <p>Posted by: {{post.user.username}}</p>
-    <!-- <p>(post.image_url) {{post.image_url}}</p> -->
-    <img src={{post.image_url}} />
-    <p>{{post.description}}</p>
+    <h2>{{post.description}}</h2>
 
     {% timezone change_to_profile_timezone %}
-    <p>Posted on {{post.created_at}} (timezone: {{change_to_profile_timezone}})</p>
+    <p class="posted-at-date">{{post.created_at | date:'F d'}}</p>
     {% endtimezone %}
+    <!-- <p>(post.id) {{post.id}}</p> -->
+    <!-- <p>Posted by: {{post.user.username}}</p> -->
+    <!-- <p>(post.image_url) {{post.image_url}}</p> -->
+    <img src={{post.image_url}} />
 
     <!-- <p>(post.tags) {{post.tags}}</p> -->
     <!-- <p>(timezone default) Posted on {{post.created_at}}</p> -->

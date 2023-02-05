@@ -100,33 +100,49 @@ ul li:before {
     flex-wrap: wrap;
     justify-content: space-evenly;
     /* width: 320px; */
-    gap: 32px 16px;
+    gap: 32px 8px;
 }
 
 .post-container {
     background-color: #cccccc;
     border: 1px solid #ffffff;
     width: 320px;
-    /* width: 100%; */
-    /* overflow: hidden; */
     height: 100%;
-    /* height: auto; */
-    padding: 6px 8px;
-    /* background-color: blue; */
-    box-sizing: border-box;
-    /* display: flex;
-    flex-direction: column; */
 }
 
 .post-container:hover {
-    background-color: #d0d0d0;
+    background-color: #d8d8d8;
+}
+
+.post-username {
+    background-color: #bbbbbb;
+    /* border: 1px dashed red; */
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 4px 8px;
+    /* margin: 80px; */
+    /* box-sizing: border-box; */
+}
+
+.post-username:hover {
+    background-color: #d8d8d8;
+}
+
+.post-body {
+    /* border: 1px dashed red; */
+    /* width: 100%; */
+    /* height: 100%; */
+    padding: 0px 8px 8px;
+    /* background-color: green; */
+    /* margin: 80px; */
+    /* box-sizing: border-box; */
 }
 
 .post-container img {
     /* width: 100%; */
-    width: auto;
+    /* width: auto; */
     max-width: 100%;
-    padding: 2px;
+    /* padding: 24px; */
 
     /* display: block; */
 }
@@ -137,9 +153,9 @@ ul li:before {
     font-size: 1rem;
 }
 
-.post-container:hover .posted-at-date {
+.post-body:hover .posted-at-date {
     color: #aaaaaa;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 /* .post-container a {
@@ -187,8 +203,20 @@ ul li:before {
     /* width: 600px; */
 }
 
-.details p {
+/* .details {
+    border: 1px solid #ffffff;
+} */
+
+.details h2, .details p {
     margin: 8px 0;
+    /* padding: 16px; */
+}
+
+.details img {
+    /* width: auto; */
+    max-width: 100%;
+    border: 1px solid #ffffff;
+    padding: 16px;
 }
 
 .button-box {
@@ -198,14 +226,14 @@ ul li:before {
 .button {
     font-family: 'JetBrains Mono', monospace;
     font-size: 1rem;
-    background-color: #bbbbbb;
+    background-color: #c0c0c0;
     border: 2px solid;
-    border-radius: 20px;
+    border-radius: 16px;
     padding: 4px 8px;
 }
 
 .button:hover {
-    background-color: #c0c0c0;
+    background-color: #d0d0d0;
 }
 
 @media (orientation: portrait) {
