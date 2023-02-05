@@ -11,8 +11,8 @@
 
 <div class="image-select-container debug">
     <input type="file" class="selected-image" accept="image/*" />
-    <input type="hidden" class="corrupt" value="Corrupt" onclick=changeAfterImage() />
-    <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=doItTenTimes() />
+    <input type="hidden" class="corrupt" value="Corrupt x 1" onclick=changeAfterImage() />
+    <input type="hidden" class="corrupt-ten-times" value="Corrupt x 20" onclick=doItTwentyTimes() />
     <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
     <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST">
         {% csrf_token %}

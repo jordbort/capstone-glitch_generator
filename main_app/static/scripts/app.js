@@ -93,9 +93,9 @@ function changeAfterImage() {
     // afterByteArray = beforeByteArray.slice(0)
 
     const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
-    const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
-    const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
-    const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    // const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    // const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
+    // const randomIndex4 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
 
     // Possibly eventually for displaying hex values on-screen
     // const beforeValue1 = afterByteArray[randomIndex1]
@@ -104,9 +104,9 @@ function changeAfterImage() {
     // const beforeValue4 = afterByteArray[randomIndex4]
 
     afterByteArray[randomIndex1] = Math.floor(Math.random() * 256)
-    afterByteArray[randomIndex2] = Math.floor(Math.random() * 256)
-    afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
-    afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
+    // afterByteArray[randomIndex2] = Math.floor(Math.random() * 256)
+    // afterByteArray[randomIndex3] = Math.floor(Math.random() * 256)
+    // afterByteArray[randomIndex4] = Math.floor(Math.random() * 256)
 
     // Example rendering of hex values
     // console.log(`1) Byte ${randomIndex1.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue1.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex1].toString(16).padStart(2, '0').toUpperCase()}`)
@@ -130,7 +130,17 @@ function resetAfterImage() {
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
 }
 
-function doItTenTimes() {
+function doItTwentyTimes() {
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
+    changeAfterImage()
     changeAfterImage()
     changeAfterImage()
     changeAfterImage()
