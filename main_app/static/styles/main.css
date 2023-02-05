@@ -124,7 +124,7 @@ ul li:before {
     background-color: #ffffff;
     border-bottom: 4px solid #ffffff;
     display: flex;
-    flex-flow: row nowrap;
+    flex-direction: row;
     gap: 4px;
     width: 100%;
     max-height: 600px;
@@ -287,7 +287,7 @@ ul li:before {
     }
 
     .preview-windows-container {
-        flex-flow: column-reverse nowrap;
+        flex-direction: column-reverse;
     }
 
     .preview-window-before,

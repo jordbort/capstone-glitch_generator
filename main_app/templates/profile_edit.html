@@ -10,7 +10,7 @@
 {% if profile.user.id == auth_profile.user_id %}
 <!-- <span>yes, you're {{auth_profile}}! please proceed</span> -->
 <form action="" method="post">
-    {% csrf_token %} {{form.as_p}} <input type="submit" value="Edit profile" />
+    {% csrf_token %} {{form.as_p}} <input type="submit" value="Submit" />
 </form>
 
 <!-- {% else } -->
