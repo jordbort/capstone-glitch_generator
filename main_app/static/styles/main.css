@@ -20,7 +20,8 @@ body {
     font-size: 1.25rem;
     /* background-color: #111111;
     color: #dddddd; */
-    margin: 0 240px;
+    margin: 0 240px 32px;
+    /* border: 1px dashed red; */
     /* margin: 0 auto; */
 }
 
@@ -39,6 +40,7 @@ p {
 
 header {
     margin-bottom: 12px;
+    text-decoration: underline;
 }
 
 a {
@@ -83,26 +85,39 @@ a:hover {
     flex-wrap: wrap;
     justify-content: space-evenly;
     /* width: 320px; */
-    gap: 16px;
+    gap: 32px 16px;
 }
 
 .post-container {
-    background-color: #bbbbbb;
     border: 1px solid #ffffff;
     width: 320px;
     /* width: 100%; */
     /* overflow: hidden; */
-    /* margin: 0; */
     height: 100%;
+    /* height: auto; */
     padding: 6px 8px;
+    /* background-color: blue; */
+    box-sizing: border-box;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.post-container:hover {
+    background-color: #d0d0d0;
 }
 
 .post-container img {
-    /* width: auto; */
+    /* width: 100%; */
+    width: auto;
     max-width: 100%;
     padding: 2px;
+    
     /* display: block; */
 }
+
+/* .post-container a {
+    background-color: blue;
+} */
 
 .preview-windows-container {
     display: flex;
@@ -180,8 +195,8 @@ a:hover {
     border-color: orange;
 }
 
-.black {
-    border-color: black;
+.yellow {
+    border-color: yellow;
 }
 
 .thick {
