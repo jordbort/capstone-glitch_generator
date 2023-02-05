@@ -5,33 +5,31 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h2>Home</h2>
-<div class="all-posts debug blue">
+<header>
+    <h2>Newest posts</h2>
+</header>
+<div class="all-posts">
 
     {% for post in posts %}
-    <a href="{% url 'post_detail' post.pk %}">
-        <div class="post-container debug">
-            <!-- <p class="debug">(post.id) {{post.id}}</p> -->
-            <!-- <p class="debug">(post.user_id) {{post.user_id}}</p> -->
-            <!-- <p class="debug">(post.user) {{post.user}}</p> -->
-            <p class="debug">Posted by {{post.user.username}}</p>
-            <!-- <p class="debug">(post.image_url) {{post.image_url}}</p> -->
-            <img src={{post.image_url}} class="debug" />
-            <p class="debug">description: {{post.description}}</p>
+    <div class="post-container">
+        <a href="{% url 'post_detail' post.pk %}">
+            <p>{{post.user.username}}</p>
+            <img src={{post.image_url}} />
+            <p>description: {{post.description}}</p>
 
             <!-- {% timezone change_to_profile_timezone } -->
-            <!-- <p class="debug">Posted on {{post.created_at | date:'M d, Y'}} at {{post.created_at | date:'h:i:s A'}} ({{change_to_profile_timezone}})</p> -->
+            <!-- <p>Posted on {{post.created_at | date:'M d, Y'}} at {{post.created_at | date:'h:i:s A'}} ({{change_to_profile_timezone}})</p> -->
             <!-- {% endtimezone } -->
 
-            <!-- <p class="debug">Posted on {{post.created_at}} (default: UTC)</p> -->
-            <p class="debug">Posted on {{post.created_at | date:'F d'}}</p>
-            <!-- <p class="debug">Posted on {{post.created_at | date:'Y-m-d H:i'}}</p> -->
-            <!-- <p class="debug">Posted on {{post.created_at | date:'D d M Y'}}</p> -->
-            <!-- <p class="debug">Posted on {{post.created_at | date:'F d, Y h:i'}}</p> -->
-        </div>
-    </a>
+            <!-- <p>Posted on {{post.created_at}} (default: UTC)</p> -->
+            <p>Posted on {{post.created_at | date:'F d'}}</p>
+            <!-- <p>Posted on {{post.created_at | date:'Y-m-d H:i'}}</p> -->
+            <!-- <p>Posted on {{post.created_at | date:'D d M Y'}}</p> -->
+            <!-- <p>Posted on {{post.created_at | date:'F d, Y h:i'}}</p> -->
+        </a>
+    </div>
     {% empty %}
-    <p class="debug">There are no posts</p>
+    <p>There are no posts</p>
     {% endfor %}
 
 </div>

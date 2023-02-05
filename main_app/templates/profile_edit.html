@@ -3,7 +3,9 @@
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
-<h2>Edit Profile</h2>
+<header>
+    <h2>Edit Profile</h2>
+</header>
 <span class="debug">Checking again: are you {{profile.user.username}}?</span>
 {% if profile.user.id == auth_profile.user_id %}
 <span class="debug">yes, you're {{auth_profile}}! please proceed</span>

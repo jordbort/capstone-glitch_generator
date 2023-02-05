@@ -3,7 +3,9 @@
 {% block title %}Delete Profile{% endblock %}
 
 {% block content %}
-<h2>Delete Profile</h2>
+<header>
+    <h2>Delete Profile</h2>
+</header>
 <span class="debug">Checking again: are you {{profile.user.username}}?</span>
 
 {% if profile.user.id == auth_profile.user_id %}

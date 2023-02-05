@@ -5,7 +5,9 @@
 {% block title %}Create Post{% endblock %}
 
 {% block content %}
-<h2>Create Post</h2>
+<header>
+    <h2>Create Post</h2>
+</header>
 <img src="{{post_image_url}}" alt="user's image" />
 <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
