@@ -1,10 +1,11 @@
 # Glitch Gator
 
-'Glitch Gator' is a 'GLITCH art GenerATOR'. You can upload your own image to make into glitch art, and share the results with others! Check out the deployed site here: https://glitch-gator.herokuapp.com/
+'Glitch Gator' is a 'GLITCH art GenerATOR'. You can upload your own images to create glitch art, and share your results! Check out the deployed site here: https://glitch-gator.herokuapp.com/
 
 ## Screenshots
-![Screenshot from 2023-02-05 18-08-15](https://user-images.githubusercontent.com/115664302/216851709-d96bf566-6478-4a67-9de1-e3603ea449e6.png)
-The "About" page gives a brief description of the project. 
+
+![Screenshot from 2023-02-05 23-52-29](https://user-images.githubusercontent.com/115664302/216886713-aa92e6c1-4520-49ed-828f-285502f70f30.png)
+The "Home" page shows an index of all users' posts.
 
 ![Screenshot from 2023-02-05 18-11-04](https://user-images.githubusercontent.com/115664302/216851711-c12ae1f9-acb2-499e-b375-f5814f393e6b.png)
 The preview window has a "before and after" style display, buttons for you to corrupt random bytes of data, a reset button, and a submit button.
@@ -51,3 +52,16 @@ Please see the <a href="https://github.com/jordbort/capstone-glitch_generator/bl
 ## Known bugs
 
 ## Future features/stretch goals
+
+Ideas/plans for the future include:
+- Likes on posts
+- Comments on posts
+- Tags for posts
+- A search bar for tags and/or post description
+- Email-verification
+- Additional profile settings:
+  - Bio/about section
+  - Local timezone
+  - Light/dark mode
+  - Profile picture
+  - Profile color scheme
