@@ -189,26 +189,3 @@ function bigGlitch() {
     formImageFile.files = fileStorage.files
     if (formImageSubmitButton.type === 'hidden') { formImageSubmitButton.type = 'submit' }
 }
-
-function doItTwentyTimes() {
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-    changeAfterImage()
-}
