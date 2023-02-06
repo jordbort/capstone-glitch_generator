@@ -174,12 +174,12 @@ function bigGlitch() {
     // console.log(`2) Byte 0x${randomIndex2.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue2.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex2].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`3) Byte 0x${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`4) Byte 0x${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`5) Byte 0x${randomIndex5.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue5.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`6) Byte 0x${randomIndex6.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue6.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`7) Byte 0x${randomIndex7.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue7.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`8) Byte 0x${randomIndex8.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue8.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`9) Byte 0x${randomIndex9.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue9.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
-    // console.log(`10) Byte 0x${randomIndex10.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue10.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`5) Byte 0x${randomIndex5.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue5.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex5].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`6) Byte 0x${randomIndex6.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue6.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex6].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`7) Byte 0x${randomIndex7.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue7.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex7].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`8) Byte 0x${randomIndex8.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue8.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex8].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`9) Byte 0x${randomIndex9.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue9.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex9].toString(16).padStart(2, '0').toUpperCase()}`)
+    // console.log(`10) Byte 0x${randomIndex10.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue10.toString(16).padStart(2, '0').toUpperCase()} => 0x${afterByteArray[randomIndex10].toString(16).padStart(2, '0').toUpperCase()}`)
 
     afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
 
