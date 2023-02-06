@@ -35,7 +35,7 @@ Repo: https://github.com/jordbort/capstone-glitch_generator
 ## Data Models + Entity-relationship diagram (ERD)
 ![Capstone - glitch art project ERD](https://user-images.githubusercontent.com/115664302/215382429-09fd0be8-433c-41ae-811b-20a32ac5082b.png)
 
-## Milestones - A break down of what you plan to do through days 1-5 of development time. Your goal should be to be done with MVP by Friday EOD.
+## Milestones
 - Create Django framework with placeholder templates
 - Create models for Profiles and Posts
 - Sandbox image glitching function(s) and live preview (I don't need to use React for this to change/refresh, right?)
