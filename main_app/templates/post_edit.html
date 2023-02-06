@@ -12,7 +12,7 @@
     <form action="" method="post">
         {% csrf_token %}
         {{form.as_p}}
-        <input type="submit" value="Edit post" />
+        <input type="submit" value="Submit" />
     </form>
     <img src={{post.image_url}} width="50%" height="auto" />
 </div>
