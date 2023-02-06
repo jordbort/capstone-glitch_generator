@@ -15,6 +15,8 @@ Post models have full CRUDibility and ownership, meaning that the owner (and onl
 
 ## Mobile screenshots
 
+<img src="https://user-images.githubusercontent.com/115664302/216893803-f45c81e2-6c43-4d65-9925-9409327b2e4d.PNG" alt="Glitch Gator Home page" width=24% />&nbsp;<img src="https://user-images.githubusercontent.com/115664302/216893845-861b4d76-c68a-4ade-b791-590e43c36578.PNG" alt="Glitch Gator About page" width=24% />&nbsp;<img src="https://user-images.githubusercontent.com/115664302/216893914-55ad224f-c298-40e2-b91b-917f680fd8b3.PNG" alt="Glitch Gator image maker" width=24% />&nbsp;<img src="https://user-images.githubusercontent.com/115664302/216893925-edc11a71-a04a-4894-9d6e-e814d20ad97b.PNG" alt="Glitch Gator post detail" width=24% />
+
 ## Technologies used
 
 - Django
