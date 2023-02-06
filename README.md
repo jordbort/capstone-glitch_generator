@@ -58,12 +58,14 @@ Please see the <a href="https://github.com/jordbort/capstone-glitch_generator/bl
 Ideas/plans for the future include:
 - Likes on posts
 - Comments on posts
+- More refined glitch controls and parameters
 - Tags for posts
 - A search bar for tags and/or post description
-- Email-verification
+- Email verification, password recovery
 - Additional profile settings:
   - Bio/about section
   - Local timezone
   - Light/dark mode
   - Profile picture
   - Profile color scheme
+- Continued styling updates
