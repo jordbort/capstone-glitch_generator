@@ -69,10 +69,19 @@ ul li:before {
     font-family: 'JetBrains Mono', monospace;
 }
 
+.about h1,
 .about h2,
 .about h3,
 .about p {
     margin: 24px;
+}
+
+.question {
+    font-style: italic;
+}
+
+.answer {
+    padding-left: 64px;
 }
 
 .all-posts {
@@ -276,10 +285,15 @@ ul li:before {
         width: 90%;
     }
 
+    .about h1,
     .about h2,
     .about h3,
     .about p {
         margin: 16px;
+    }
+
+    .answer {
+        padding-left: 40px;
     }
 
     .button {
