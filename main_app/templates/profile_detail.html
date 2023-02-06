@@ -4,13 +4,14 @@
 
 {% block content %}
 <header>
-    <h1>{{profile.user}}'s Profile</h1>
+    <h1>Profile of: {{profile.user.username}}</h1>
 </header>
 <div class="details">
 
     {% if profile.social_link %}
-    <p>Visit them at: <a href="{{profile.social_link}}" target="_blank"
-            rel="noopener noreferrer">{{profile.social_link}}</a></p>
+    <p>Visit them at:
+        <a href="{{profile.social_link}}" target="_blank" rel="noopener noreferrer">{{profile.social_link}}</a>
+    </p>
     {% endif %}
 
     <p>User since: {{profile.created_at | date:'F d, Y'}}</p>
