@@ -4,7 +4,7 @@
 
 {% block content %}
 <header>
-    <h1>Profile of: {{profile.user.username}}</h1>
+    <h1>About {{profile.user.username}}:</h1>
 </header>
 <div class="details">
 
@@ -26,4 +26,21 @@
 
 </div>
 
+<div class="profile-posts">
+
+    {% for post in posts %}
+    {% if post.user_id == profile.user_id %}
+    <div class="post-container">
+        <a href="{% url 'post_detail' post.pk %}">
+            <div class="post-body">
+                <img src={{post.image_url}} class="profile-post" />
+                <p>{{post.description}}</p>
+                <p class="posted-at-date">{{post.created_at | date:'F d'}}</p>
+            </div>
+        </a>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+</div>
 {% endblock %}

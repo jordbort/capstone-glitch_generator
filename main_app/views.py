@@ -100,26 +100,19 @@ class PostCreate(View):
         user = request.user
         post_image_url = request.POST.get('image_url')
         post_description = request.POST.get('description')
-        print('user:', user)
-        print('user.id:', user.id)
-        print('image_url:', post_image_url)
-        print('description:', post_description)
         new_post = Post(user_id=user.id, image_url=post_image_url,
                         description=post_description)
         new_post.save()
-        print(new_post.id)
         return redirect('post_index')
 
     def add_image(request, user):
         return redirect('post_index')
 
     def form_valid(self, form):
-        print('>> form valid is running')
         form.instance.user = self.request.user
         return super(PostCreate, self).form_valid(form)
 
     def get_success_url(self):
-        print(self.kwargs)
         return reverse('post_index')
 
 
@@ -180,6 +173,7 @@ class ProfileDetail(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()
         current_user = self.request.user
         if current_user.is_authenticated:
             context['auth_profile'] = Profile.objects.get(
@@ -234,8 +228,6 @@ class Register(View):
             login(request, user)
             current_user = self.request.user
             new_profile = Profile.objects.get(user_id=current_user.id)
-            print('*** current_user.id:', current_user.id)
-            print('*** new_profile.id:', new_profile.id)
             return redirect('profile_detail', new_profile.id)
         else:
             context = {"form": form}

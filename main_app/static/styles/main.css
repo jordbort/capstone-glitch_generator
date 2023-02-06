@@ -91,6 +91,13 @@ ul li:before {
     gap: 40px 8px;
 }
 
+.profile-posts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 40px;
+}
+
 .post-container {
     background-color: #cccccc;
     border: 1px solid #ffffff;
@@ -117,6 +124,10 @@ ul li:before {
 
 .post-container img {
     max-width: 100%;
+}
+
+.profile-post {
+    padding-top: 8px;
 }
 
 .posted-at-date {
