@@ -292,6 +292,15 @@ ul li:before {
         padding: 8px 0;
     }
 
+    .profile-posts {
+        /* display: flex; */
+        flex-direction: column;
+        /* justify-content: space-evenly; */
+        align-items: center;
+        gap: 40px;
+        margin: 16px 0 32px;
+    }
+
     .post-container {
         width: 90%;
     }
