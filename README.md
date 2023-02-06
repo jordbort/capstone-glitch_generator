@@ -44,6 +44,10 @@ This will start up the server. Then, navigate to:
 
 You should see the home page of the app appear in your web browser.
 
+## Wireframes, diagrams, and planning materials
+
+Please see the <a href="https://github.com/jordbort/capstone-glitch_generator/blob/main/planning.md">planning.md</a> document for more information.
+
 ## Known bugs
 
 ## Future features/stretch goals
