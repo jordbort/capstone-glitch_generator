@@ -51,8 +51,6 @@ You should see the home page of the app appear in your web browser.
 
 Please see the <a href="https://github.com/jordbort/capstone-glitch_generator/blob/main/planning.md">planning.md</a> document for more information.
 
-## Known bugs
-
 ## Future features/stretch goals
 
 Ideas/plans for the future include:
