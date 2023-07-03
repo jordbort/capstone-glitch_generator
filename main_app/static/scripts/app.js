@@ -7,6 +7,8 @@ const afterImage = document.querySelector('.heximage-after')
 const corruptButton = document.querySelector('.corrupt')
 const corruptTenTimesButton = document.querySelector('.corrupt-ten-times')
 const resetButton = document.querySelector('.reset')
+const undoButton = document.querySelector('.undo')
+const redoButton = document.querySelector('.redo')
 
 const formImageFile = document.querySelector('.image-file')
 const formImageSubmitButton = document.querySelector('.submit-image')
@@ -15,10 +17,28 @@ let imageData
 let beforeByteArray
 let afterByteArray
 let fileExtension
+let memoryBank = []
+let memoryPoint = 0
+
+function undoGlitch() {
+    console.log(`*** UNDO ***`)
+    // URL.revokeObjectURL(afterImage.src)
+    memoryPoint -= 1
+    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    console.log(memoryBank[memoryPoint])
+    afterImage.src = memoryBank[memoryPoint]
+    if (memoryPoint === 0) {
+        undoButton.disabled = true
+    }
+}
+
+function redoGlitch() {
+    console.log(`*** REDO ***`)
+}
 
 function getHex(e) {
-    // console.log('> getHex invoked!')
-    if (formImageSubmitButton.type === 'submit') { formImageSubmitButton.type = 'hidden' }
+    console.log('> getHex invoked!')
+    formImageSubmitButton.disabled = true
     const pad = (str, len) => str.length < len ? pad('0' + str, len) : str
 
     let af = null
@@ -51,8 +71,10 @@ function getHex(e) {
 
         if (result) {
             corruptButton.type = 'button'
-            corruptTenTimesButton.type = 'button'
+            // corruptTenTimesButton.type = 'button'
             resetButton.type = 'button'
+            undoButton.type = 'button'
+            redoButton.type = 'button'
         }
         return newImageConvert(result)
     }
@@ -65,10 +87,10 @@ function getHex(e) {
 }
 
 function newImageConvert(input) {
-    // console.log('> newImageConvert invoked!')
+    console.log('> newImageConvert invoked!')
     fileExtension = imageSelector.value.substr(imageSelector.value.lastIndexOf(".") + 1)
-    URL.revokeObjectURL(beforeImage.src)
-    URL.revokeObjectURL(afterImage.src)
+    // URL.revokeObjectURL(beforeImage.src)
+    // URL.revokeObjectURL(afterImage.src)
 
     let binary = new Array()
     for (let i = 0; i < input.length / 2; i++) {
@@ -79,14 +101,19 @@ function newImageConvert(input) {
     let byteArray = new Uint8Array(binary)
 
     beforeByteArray = byteArray.slice(0)
+    memoryBank.push(URL.createObjectURL(new Blob([beforeByteArray], { type: `image/${fileExtension}` })))
+    // memoryBank.push(beforeByteArray)
     afterByteArray = byteArray.slice(0)
-    beforeImage.src = URL.createObjectURL(new Blob([beforeByteArray], { type: `image/${fileExtension}` }))
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
+    console.log('memoryBank:', memoryBank)
+    console.log('memoryPoint:', memoryPoint)
+    beforeImage.src = memoryBank[0]
+    afterImage.src = memoryBank[memoryPoint]
+    console.log('memoryBank:', memoryBank)
 }
 
 function changeAfterImage() {
     // console.log('> changeAfterImage invoked!')
-    URL.revokeObjectURL(afterImage.src)
+    // URL.revokeObjectURL(afterImage.src)
 
     // Possible placeholder for corruption settings
 
@@ -115,7 +142,14 @@ function changeAfterImage() {
     // console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${afterByteArray[randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
+    memoryBank.push(URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` })))
+    memoryPoint += 1
+    memoryBank.length = memoryPoint + 1
+    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+
+    console.log(memoryBank[memoryPoint])
+    afterImage.src = memoryBank[memoryPoint]
+    undoButton.disabled = false
 
     let glitchedFile = new File([afterByteArray], `${afterImage.src.substr(afterImage.src.lastIndexOf('/') + 1)}.${fileExtension}`, { type: `image/${fileExtension}` })
     let fileStorage = new DataTransfer()
@@ -126,15 +160,20 @@ function changeAfterImage() {
 
 function resetAfterImage() {
     // console.log('> resetAfterImage invoked!')
-    formImageSubmitButton.type = 'hidden'
-    URL.revokeObjectURL(afterImage.src)
-    afterByteArray = beforeByteArray.slice(0)
-    afterImage.src = URL.createObjectURL(new Blob([afterByteArray], { type: `image/${fileExtension}` }))
+    formImageSubmitButton.disabled = true
+    undoButton.disabled = true
+    redoButton.disabled = true
+    for (let i = 1; i < memoryBank.length; i++) {
+        URL.revokeObjectURL(memoryBank[i])
+    }
+    memoryBank.length = 1
+    memoryPoint = 0
+    afterImage.src = memoryBank[memoryPoint]
 }
 
 function bigGlitch() {
     // console.log('> bigGlitch invoked!')
-    URL.revokeObjectURL(afterImage.src)
+    // URL.revokeObjectURL(afterImage.src)
     const randomIndex1 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex2 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex3 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
@@ -145,7 +184,7 @@ function bigGlitch() {
     const randomIndex8 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex9 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
     const randomIndex10 = Math.floor(Math.random() * afterByteArray.length - 16) + 16
-    
+
     // Possibly eventually for displaying hex values on-screen
     // const beforeValue1 = afterByteArray[randomIndex1]
     // const beforeValue2 = afterByteArray[randomIndex2]
