@@ -8,7 +8,7 @@
 The "Home" page shows an index of all users' posts.
 
 ![Screenshot from 2023-02-05 18-11-04](https://user-images.githubusercontent.com/115664302/216851711-c12ae1f9-acb2-499e-b375-f5814f393e6b.png)
-The preview window has a "before and after" style display, buttons for you to corrupt random bytes of data, a reset button, and a submit button.
+The preview window has a "before and after" style display, buttons for you to corrupt random bytes of data, a reset button, and a submit button. As of July 4, 2023 there is now an undo/redo feature!
 
 ![Screenshot from 2023-02-05 18-13-32](https://user-images.githubusercontent.com/115664302/216851721-bee93f02-655b-4738-93c2-581a705591ee.png)
 Post models have full CRUDibility and ownership, meaning that the owner (and only the owner) of a post can edit or delete it.
