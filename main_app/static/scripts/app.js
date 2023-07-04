@@ -102,7 +102,7 @@ function getHex(e) {
             resetButton.type = 'button'
             undoButton.type = 'button'
             redoButton.type = 'button'
-            formImageSubmitButton.type = 'button'
+            formImageSubmitButton.type = 'submit'
         }
         return newImageConvert(result)
     }
