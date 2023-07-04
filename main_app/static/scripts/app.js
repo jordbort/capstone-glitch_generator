@@ -14,32 +14,32 @@ const formImageFile = document.querySelector('.image-file')
 const formImageSubmitButton = document.querySelector('.submit-image')
 
 let imageData
-// let beforeByteArray
-// let afterByteArray
 let fileExtension
 let memoryBank = []
 let memoryPoint = 0
 
 function undoGlitch() {
-    console.log(`*** UNDO ***`)
+    // console.log(`*** UNDO ***`)
     URL.revokeObjectURL(afterImage.src)
     redoButton.disabled = false
     memoryPoint -= 1
-    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    // console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
 
     afterImage.src = URL.createObjectURL(new Blob([memoryBank[memoryPoint]], { type: `image/${fileExtension}` }))
 
     if (memoryPoint === 0) {
         undoButton.disabled = true
+        formImageSubmitButton.disabled = true
     }
 }
 
 function redoGlitch() {
-    console.log(`*** REDO ***`)
+    // console.log(`*** REDO ***`)
     URL.revokeObjectURL(afterImage.src)
     undoButton.disabled = false
+    formImageSubmitButton.disabled = false
     memoryPoint += 1
-    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    // console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
 
     afterImage.src = URL.createObjectURL(new Blob([memoryBank[memoryPoint]], { type: `image/${fileExtension}` }))
 
@@ -49,7 +49,7 @@ function redoGlitch() {
 }
 
 function resetAfterImage() {
-    console.log('> resetAfterImage invoked!')
+    // console.log('> resetAfterImage invoked!')
     URL.revokeObjectURL(afterImage.src)
     formImageSubmitButton.disabled = true
     undoButton.disabled = true
@@ -57,12 +57,12 @@ function resetAfterImage() {
     memoryBank.length = 1
     memoryPoint = 0
 
-    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    // console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
     afterImage.src = URL.createObjectURL(new Blob([memoryBank[memoryPoint]], { type: `image/${fileExtension}` }))
 }
 
 function getHex(e) {
-    console.log('> getHex invoked!')
+    // console.log('> getHex invoked!')
     formImageSubmitButton.disabled = true
     undoButton.disabled = true
     redoButton.disabled = true
@@ -102,6 +102,7 @@ function getHex(e) {
             resetButton.type = 'button'
             undoButton.type = 'button'
             redoButton.type = 'button'
+            formImageSubmitButton.type = 'button'
         }
         return newImageConvert(result)
     }
@@ -115,12 +116,12 @@ function getHex(e) {
 
 // Converting accepted image to a hex array
 function newImageConvert(input) {
-    console.log('> newImageConvert invoked!')
+    // console.log('> newImageConvert invoked!')
     memoryBank.length = 0
     memoryPoint = 0
     fileExtension = imageSelector.value.substr(imageSelector.value.lastIndexOf(".") + 1)
-    // URL.revokeObjectURL(beforeImage.src)
-    // URL.revokeObjectURL(afterImage.src)
+    URL.revokeObjectURL(beforeImage.src)
+    URL.revokeObjectURL(afterImage.src)
 
     let binary = new Array()
     for (let i = 0; i < input.length / 2; i++) {
@@ -140,7 +141,7 @@ function newImageConvert(input) {
 
 // "Corrupt x 1" button (change function name/destructure when there are more corruption settings)
 function changeAfterImage() {
-    console.log('> changeAfterImage invoked!')
+    // console.log('> changeAfterImage invoked!')
     memoryPoint += 1
     memoryBank.length = memoryPoint
     URL.revokeObjectURL(afterImage.src)
@@ -173,7 +174,7 @@ function changeAfterImage() {
     // console.log(`3) Byte ${randomIndex3.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue3.toString(16).padStart(2, '0').toUpperCase()} => ${memoryBank[memoryPoint][randomIndex3].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`4) Byte ${randomIndex4.toString(16).padStart(2, '0').toUpperCase()}: ${beforeValue4.toString(16).padStart(2, '0').toUpperCase()} => ${memoryBank[memoryPoint][randomIndex4].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    // console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
     afterImage.src = URL.createObjectURL(new Blob([memoryBank[memoryPoint]], { type: `image/${fileExtension}` }))
     undoButton.disabled = false
     redoButton.disabled = true
@@ -182,11 +183,11 @@ function changeAfterImage() {
     let fileStorage = new DataTransfer()
     fileStorage.items.add(glitchedFile)
     formImageFile.files = fileStorage.files
-    if (formImageSubmitButton.type === 'hidden') { formImageSubmitButton.type = 'submit' }
+    formImageSubmitButton.disabled = false
 }
 
 function bigGlitch() {
-    console.log('> bigGlitch invoked!')
+    // console.log('> bigGlitch invoked!')
     memoryPoint += 1
     memoryBank.length = memoryPoint
     URL.revokeObjectURL(afterImage.src)
@@ -238,7 +239,7 @@ function bigGlitch() {
     // console.log(`9) Byte 0x${randomIndex9.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue9.toString(16).padStart(2, '0').toUpperCase()} => 0x${memoryBank[memoryPoint][randomIndex9].toString(16).padStart(2, '0').toUpperCase()}`)
     // console.log(`10) Byte 0x${randomIndex10.toString(16).padStart(2, '0').toUpperCase()}: 0x${beforeValue10.toString(16).padStart(2, '0').toUpperCase()} => 0x${memoryBank[memoryPoint][randomIndex10].toString(16).padStart(2, '0').toUpperCase()}`)
 
-    console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
+    // console.log("memoryBank.length:", memoryBank.length, "memoryPoint:", memoryPoint)
     afterImage.src = URL.createObjectURL(new Blob([memoryBank[memoryPoint]], { type: `image/${fileExtension}` }))
     undoButton.disabled = false
     redoButton.disabled = true
@@ -247,5 +248,5 @@ function bigGlitch() {
     let fileStorage = new DataTransfer()
     fileStorage.items.add(glitchedFile)
     formImageFile.files = fileStorage.files
-    if (formImageSubmitButton.type === 'hidden') { formImageSubmitButton.type = 'submit' }
+    formImageSubmitButton.disabled = false
 }
