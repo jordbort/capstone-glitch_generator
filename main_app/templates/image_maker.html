@@ -17,9 +17,11 @@
     <div class="glitch-controls">
         <input type="hidden" class="corrupt" value="Corrupt x 1" onclick=changeAfterImage() />
         <input type="hidden" class="corrupt-ten-times" value="Corrupt x 10" onclick=bigGlitch() />
+        <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
+    </div>
+    <div class="glitch-controls">
         <input type="hidden" class="undo" value="Undo" onclick=undoGlitch() disabled />
         <input type="hidden" class="redo" value="Redo" onclick=redoGlitch() disabled />
-        <input type="hidden" class="reset" value="Reset" onclick=resetAfterImage() />
         <form action="{% url 'image_upload' %}" enctype="multipart/form-data" method="POST" class="file-store">
             {% csrf_token %}
             <input type="file" name="image_url" class="image-file" accept="image/*" />
