@@ -80,7 +80,7 @@ function getHex(e) {
         let FR = new FileReader()
         return new Promise((resolve, reject) => {
             FR.onloadend = (evt) => { resolve(evt.target.result) }
-            FR.onerror = (err) => { reject(event.target.error) }
+            FR.onerror = (err) => { reject(err) }
             FR.readAsArrayBuffer(file)
         })
     }
