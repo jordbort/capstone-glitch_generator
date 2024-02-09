@@ -1,6 +1,6 @@
 # Glitch Gator
 
-'Glitch Gator' is a 'GLITCH art GenerATOR'. You can upload your own images to create glitch art, and share your results! Check out the deployed site here: https://glitch-gator.herokuapp.com/
+'Glitch Gator' is a 'GLITCH art GenerATOR'. You can upload your own images to create glitch art, and share your results! Check out the deployed site here: https://glitchgator.com/
 
 ## Screenshots
 
